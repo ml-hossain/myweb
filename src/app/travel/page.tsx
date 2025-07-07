@@ -10,12 +10,9 @@ import {
   MapPin,
   Calendar,
   CreditCard,
-  Clock,
   CheckCircle,
   ArrowRight,
   Star,
-  Users,
-  Globe,
   Car,
   Camera,
   Briefcase
@@ -550,7 +547,7 @@ const TravelPage: React.FC = () => {
                     <Star key={i} size={16} className="text-yellow-400 fill-current" />
                   ))}
                 </div>
-                <p className="text-gray-700 italic">"{testimonial.text}"</p>
+                <p className="text-gray-700 italic">&quot;{testimonial.text}&quot;</p>
               </motion.div>
             ))}
           </div>

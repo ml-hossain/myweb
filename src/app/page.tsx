@@ -77,6 +77,29 @@ const HomePage: React.FC = () => {
     },
   ];
 
+  const team = [
+    {
+      name: 'John Doe',
+      role: 'CEO & Founder',
+      image: '/api/placeholder/120/120',
+    },
+    {
+      name: 'Jane Smith',
+      role: 'Head of Education',
+      image: '/api/placeholder/120/120',
+    },
+    {
+      name: 'Peter Jones',
+      role: 'Lead Travel Consultant',
+      image: '/api/placeholder/120/120',
+    },
+    {
+        name: 'Samuel Green',
+        role: 'Visa Expert',
+        image: '/api/placeholder/120/120',
+    }
+  ];
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -237,8 +260,8 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="py-20 bg-gray-50">
+      {/* Team Section */}
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -246,35 +269,12 @@ const HomePage: React.FC = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">What Our Students Say</h2>
-            <p className="text-xl text-gray-600">Real experiences from students who achieved their dreams</p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={testimonial.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="bg-white rounded-xl p-6 shadow-lg"
-              >
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
-                    <p className="text-gray-600 text-sm flex items-center">
-                      <MapPin size={12} className="mr-1" />
-                      {testimonial.country}
-                    </p>
-                  </div>
-                </div>
-                <div className="flex mb-4">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Meet Our Experts</h2>
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <Star key={i} size={16} className="text-yellow-400 fill-current" />
                   ))}
                 </div>
-                <p className="text-gray-700 italic">"{testimonial.text}"</p>
+                <p className="text-gray-700 italic">&quot;{testimonial.text}&quot;</p>
               </motion.div>
             ))}
           </div>

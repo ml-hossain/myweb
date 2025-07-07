@@ -8,11 +8,9 @@ import {
   BookOpen,
   Award,
   FileText,
-  Users,
   Clock,
   CheckCircle,
   ArrowRight,
-  Star,
   Globe,
   DollarSign,
   Calendar
@@ -32,8 +30,6 @@ const EducationPage: React.FC = () => {
         'Portfolio preparation',
         'Interview preparation'
       ],
-      price: 'Starting from $299',
-      duration: '4-6 weeks'
     },
     {
       icon: Award,
@@ -47,8 +43,6 @@ const EducationPage: React.FC = () => {
         'Merit scholarship applications',
         'Need-based aid guidance'
       ],
-      price: 'Starting from $199',
-      duration: '2-4 weeks'
     },
     {
       icon: BookOpen,
@@ -62,8 +56,6 @@ const EducationPage: React.FC = () => {
         'Course scheduling assistance',
         'Academic planning'
       ],
-      price: 'Starting from $149',
-      duration: '1-2 weeks'
     },
     {
       icon: FileText,
@@ -77,8 +69,6 @@ const EducationPage: React.FC = () => {
         'Notarization assistance',
         'Document organization'
       ],
-      price: 'Starting from $99',
-      duration: '1-3 weeks'
     }
   ];
 
@@ -264,16 +254,6 @@ const EducationPage: React.FC = () => {
                     <div className="flex-1">
                       <h3 className="text-2xl font-semibold text-gray-900 mb-2">{service.title}</h3>
                       <p className="text-gray-600 mb-4">{service.description}</p>
-                      <div className="flex items-center space-x-4 mb-4 text-sm text-gray-500">
-                        <div className="flex items-center space-x-1">
-                          <DollarSign size={16} />
-                          <span>{service.price}</span>
-                        </div>
-                        <div className="flex items-center space-x-1">
-                          <Clock size={16} />
-                          <span>{service.duration}</span>
-                        </div>
-                      </div>
                       <ul className="space-y-2">
                         {service.features.map((feature, featureIndex) => (
                           <li key={featureIndex} className="flex items-center space-x-2 text-gray-700">
@@ -426,7 +406,7 @@ const EducationPage: React.FC = () => {
                 <div className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mb-4 inline-block">
                   {testimonial.scholarship}
                 </div>
-                <p className="text-gray-700 italic">"{testimonial.text}"</p>
+                <p className="text-gray-700 italic">&quot;{testimonial.text}&quot;</p>
               </motion.div>
             ))}
           </div>

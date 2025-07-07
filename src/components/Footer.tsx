@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
-import ClientOnly from './ClientOnly';
 
 const Footer: React.FC = () => {
   const [isClient, setIsClient] = useState(false);
@@ -92,7 +91,7 @@ const Footer: React.FC = () => {
               </h3>
             )}
             <ul className="space-y-2">
-              {quickLinks.map((link, index) => (
+              {quickLinks.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
@@ -111,7 +110,7 @@ const Footer: React.FC = () => {
               Education Services
             </h3>
             <ul className="space-y-2">
-              {educationServices.map((service, index) => (
+              {educationServices.map((service) => (
                 <li key={service.name}>
                   <Link
                     href={service.href}
@@ -130,7 +129,7 @@ const Footer: React.FC = () => {
               Follow Us
             </h3>
             <div className="flex space-x-4">
-              {socialLinks.map((social, index) => {
+              {socialLinks.map((social) => {
                 const Icon = social.icon;
                 return (
                   <a
@@ -142,35 +141,6 @@ const Footer: React.FC = () => {
                   </a>
                 );
               })}
-            </div>
-            <div className="bg-gray-800 p-4 rounded-lg">
-              <h4 className="text-sm font-semibold mb-2">Newsletter</h4>
-              <p className="text-xs text-gray-400 mb-3">
-                Subscribe to get updates on new opportunities and services.
-              </p>
-              <div className="flex">
-                <ClientOnly fallback={
-                  <input
-                    type="email"
-                    placeholder="Your email"
-                    className="flex-1 px-3 py-2 bg-gray-700 text-white text-xs rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    readOnly
-                  />
-                }>
-                  <input
-                    key="footer-email-input"
-                    type="email"
-                    placeholder="Your email"
-                    autoComplete="email"
-                    data-lpignore="true"
-                    data-form-type="other"
-                    className="flex-1 px-3 py-2 bg-gray-700 text-white text-xs rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-                  />
-                </ClientOnly>
-                <button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs rounded-r-md transition-colors">
-                  Subscribe
-                </button>
-              </div>
             </div>
           </div>
         </div>

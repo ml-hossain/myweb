@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, GraduationCap, Plane, FileText } from 'lucide-react';
+import { Menu, X, GraduationCap, Plane, FileText, School } from 'lucide-react';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,7 +12,7 @@ const Navbar: React.FC = () => {
     { name: 'Home', href: '/', icon: null },
     { name: 'Education', href: '/education', icon: GraduationCap },
     { name: 'Travel', href: '/travel', icon: Plane },
-    { name: 'Visa Services', href: '/visa', icon: FileText },
+    { name: 'University', href: '/university', icon: School },
     { name: 'About', href: '/about', icon: null },
     { name: 'Contact', href: '/contact', icon: null },
   ];

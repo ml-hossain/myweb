@@ -12,10 +12,8 @@ import {
   Star,
   Lightbulb,
   Shield,
-  Clock,
   CheckCircle,
   ArrowRight,
-  MapPin,
   Phone,
   Mail
 } from 'lucide-react';
@@ -421,15 +419,10 @@ const AboutPage: React.FC = () => {
                 key={testimonial.name}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="bg-white rounded-xl p-6 shadow-lg"
+                transition={{ duration: 0.5, delay: index * 0.15 }}
+                className="bg-white p-6 rounded-lg shadow-md"
               >
-                <div className="flex mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} size={20} className="text-yellow-400 fill-current" />
-                  ))}
-                </div>
-                <p className="text-gray-700 italic mb-4">"{testimonial.text}"</p>
+                <p className="text-gray-700 italic mb-4">{`"${testimonial.text}"`}</p>
                 <div>
                   <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
                   <p className="text-blue-600 text-sm">{testimonial.role}</p>
