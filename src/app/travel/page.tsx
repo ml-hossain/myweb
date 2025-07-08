@@ -553,7 +553,7 @@ const TravelPage: React.FC = () => {
                 </div>
                 <p className="text-gray-700 italic text-sm leading-relaxed">&quot;{testimonial.text}&quot;</p>
               </motion.div>
-            ))}}
+            ))}
           </div>
         </div>
       </section>
