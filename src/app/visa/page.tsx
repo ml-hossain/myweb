@@ -591,7 +591,7 @@ const VisaPage: React.FC = () => {
                 </div>
                 <p className="text-gray-700 text-sm italic leading-relaxed">&quot;{story.story}&quot;</p>
               </motion.div>
-            ))}}
+            ))}
           </div>
         </div>
       </section>
