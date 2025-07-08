@@ -80,28 +80,40 @@ const HomePage: React.FC = () => {
 
   const team = [
     {
-      name: 'John Doe',
+      name: 'Dr. Muhammad Rahman',
       role: 'CEO & Founder',
-      image: '/api/placeholder/400/400',
-      about: 'John leads the company with a vision for global education access. With 15+ years in the industry, he ensures every student gets the best guidance.'
+      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
+      about: 'Dr. Muhammad Rahman is the visionary founder of EduTravel with over 18 years of experience in international education consulting. He holds a PhD in Educational Leadership from Harvard University and has personally guided over 5,000 students to achieve their dreams of studying abroad. His expertise spans across university admissions, scholarship strategies, and global education trends. Under his leadership, EduTravel has maintained a 98% success rate in student placements and has established partnerships with over 500 universities worldwide. Dr. Rahman is a sought-after speaker at international education conferences and has authored multiple research papers on cross-cultural education adaptation.'
     },
     {
-      name: 'Jane Smith',
-      role: 'Head of Education',
-      image: '/api/placeholder/400/400',
-      about: 'Jane specializes in university admissions and scholarship strategies, helping thousands of students achieve their academic dreams.'
+      name: 'Sarah Johnson',
+      role: 'Head of Education Services',
+      image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
+      about: 'Sarah Johnson brings 12+ years of specialized expertise in university admissions and academic planning. She graduated summa cum laude from Oxford University with a Master\'s in International Education Policy. Sarah has personally reviewed over 10,000 university applications and has an intimate understanding of admission requirements across top institutions in the US, UK, Canada, and Australia. Her strategic approach to profile building and application crafting has helped students secure admissions to Ivy League schools, Russell Group universities, and other prestigious institutions. She also leads our scholarship division, having secured over $50 million in scholarships for students over her career.'
     },
     {
-      name: 'Peter Jones',
-      role: 'Lead Travel Consultant',
-      image: '/api/placeholder/400/400',
-      about: 'Peter crafts seamless travel experiences for students, from flights to accommodation, ensuring a stress-free journey abroad.'
+      name: 'Ahmed Al-Rashid',
+      role: 'Senior Visa Consultant',
+      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
+      about: 'Ahmed Al-Rashid is our visa specialist with an outstanding 99.2% visa approval rate across all major study destinations. With 15 years of experience in immigration law and student visa processing, he holds certifications from multiple immigration authorities and maintains up-to-date knowledge of ever-changing visa regulations. Ahmed has successfully processed over 8,000 student visa applications and specializes in complex cases including visa appeals and re-applications. His multilingual abilities (Arabic, English, French, and German) enable him to serve students from diverse backgrounds. He regularly conducts visa preparation workshops and has authored the comprehensive "Student Visa Success Guide" used by counselors worldwide.'
     },
     {
-      name: 'Samuel Green',
-      role: 'Visa Expert',
-      image: '/api/placeholder/400/400',
-      about: 'Samuel is a visa specialist with a 98% approval rate, guiding students through every step of the application process.'
+      name: 'Lisa Chen',
+      role: 'Director of Student Services',
+      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
+      about: 'Lisa Chen oversees our comprehensive student support services, ensuring every student receives personalized attention throughout their journey. With a Master\'s degree in Psychology from Stanford University and 10 years in student counseling, she understands the emotional and practical challenges students face when moving abroad. Lisa has developed our proprietary pre-departure orientation program and ongoing support system that includes academic mentoring, cultural adaptation assistance, and career guidance. She leads a team of 25 counselors and has personally mentored over 3,000 students. Her innovative approach to student welfare has been recognized by the International Association of Student Affairs Professionals.'
+    },
+    {
+      name: 'David Thompson',
+      role: 'Travel & Logistics Manager',
+      image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
+      about: 'David Thompson manages all travel and logistics operations with meticulous attention to detail and cost optimization. He brings 14 years of experience from the travel industry, including 8 years with international airlines and 6 years in educational travel. David has coordinated travel arrangements for over 12,000 students and has established partnerships with major airlines to secure exclusive student discounts. His expertise includes complex itinerary planning, travel insurance coordination, and emergency travel assistance. He holds certifications in International Air Transport Association (IATA) and is our go-to expert for last-minute travel changes and emergency situations. David\'s proactive approach has saved students thousands of dollars in travel costs while ensuring seamless journey experiences.'
+    },
+    {
+      name: 'Dr. Priya Sharma',
+      role: 'Academic Advisor & Research Specialist',
+      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
+      about: 'Dr. Priya Sharma is our academic advisor specializing in STEM programs and research opportunities. She holds a PhD in Computer Science from MIT and has worked as a professor at leading universities before joining EduTravel. Dr. Sharma has extensive knowledge of research programs, graduate assistantships, and academic funding opportunities across top-tier institutions. She has helped over 2,500 students identify the perfect academic programs aligned with their career goals and has a particular expertise in emerging fields like AI, data science, and biotechnology. Her network of academic contacts spans across 40+ countries, enabling her to provide insider insights into program selection and research opportunities that significantly enhance students\' academic and career prospects.'
     }
   ];
 
