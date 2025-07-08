@@ -60,7 +60,7 @@ const HomePage: React.FC = () => {
       country: 'USA',
       university: 'Oxford University',
       program: 'Master\'s in International Relations',
-      image: '/api/placeholder/80/80',
+      image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80&q=80',
       rating: 5,
       text: 'EduTravel made my dream of studying at Oxford a reality. Their scholarship guidance helped me secure a full scholarship, and their visa support was seamless.'
     },
@@ -69,7 +69,7 @@ const HomePage: React.FC = () => {
       country: 'Bangladesh',
       university: 'MIT',
       program: 'PhD in Computer Science',
-      image: '/api/placeholder/80/80',
+      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80&q=80',
       rating: 5,
       text: 'The team\'s expertise in STEM programs was incredible. They guided me through the entire application process and helped me get into my top choice university.'
     },
@@ -78,7 +78,7 @@ const HomePage: React.FC = () => {
       country: 'Spain',
       university: 'University of Toronto',
       program: 'Bachelor\'s in Business',
-      image: '/api/placeholder/80/80',
+      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80&q=80',
       rating: 5,
       text: 'From application to arrival, EduTravel supported me every step of the way. Their travel planning service made my transition to Canada so smooth.'
     },

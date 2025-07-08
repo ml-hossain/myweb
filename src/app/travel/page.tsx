@@ -119,7 +119,7 @@ const TravelPage: React.FC = () => {
       avgFlight: '$450',
       avgStay: '£80/night',
       highlights: ['Student areas: Camden, King\'s Cross', 'Free museums', 'Oyster Card discounts'],
-      image: '/api/placeholder/300/200'
+      image: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=300&h=200&fit=crop'
     },
     {
       city: 'New York',
@@ -127,7 +127,7 @@ const TravelPage: React.FC = () => {
       avgFlight: '$520',
       avgStay: '$120/night',
       highlights: ['Student MetroCard', 'Broadway discounts', 'University partnerships'],
-      image: '/api/placeholder/300/200'
+      image: 'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=300&h=200&fit=crop'
     },
     {
       city: 'Toronto',
@@ -135,7 +135,7 @@ const TravelPage: React.FC = () => {
       avgFlight: '$380',
       avgStay: 'CAD 90/night',
       highlights: ['TTC student discount', 'Multicultural communities', 'Safe and clean'],
-      image: '/api/placeholder/300/200'
+      image: 'https://images.unsplash.com/photo-1517935706615-2717063c2225?w=300&h=200&fit=crop'
     },
     {
       city: 'Melbourne',
@@ -143,7 +143,7 @@ const TravelPage: React.FC = () => {
       avgFlight: '$680',
       avgStay: 'AUD 95/night',
       highlights: ['Free city circle tram', 'Coffee culture', 'Student suburbs'],
-      image: '/api/placeholder/300/200'
+      image: 'https://images.unsplash.com/photo-1514395462725-fb4566210144?w=300&h=200&fit=crop'
     },
     {
       city: 'Berlin',
@@ -151,7 +151,7 @@ const TravelPage: React.FC = () => {
       avgFlight: '$420',
       avgStay: '€70/night',
       highlights: ['Student semester ticket', 'Rich history', 'Affordable living'],
-      image: '/api/placeholder/300/200'
+      image: 'https://images.unsplash.com/photo-1560969184-10fe8719e047?w=300&h=200&fit=crop'
     },
     {
       city: 'Amsterdam',
@@ -159,7 +159,7 @@ const TravelPage: React.FC = () => {
       avgFlight: '$390',
       avgStay: '€85/night',
       highlights: ['Bike-friendly city', 'Student housing', 'Central Europe access'],
-      image: '/api/placeholder/300/200'
+      image: 'https://images.unsplash.com/photo-1534351590666-13e3e96b5017?w=300&h=200&fit=crop'
     }
   ];
 
@@ -220,7 +220,7 @@ const TravelPage: React.FC = () => {
       trip: 'London Study Abroad',
       rating: 5,
       text: 'The travel package made my transition to studying in London seamless. Everything was organized perfectly!',
-      image: '/api/placeholder/60/60'
+      image: 'https://images.unsplash.com/photo-1494790108755-2616b332e234?w=60&h=60&fit=crop&crop=face'
     },
     {
       name: 'Carlos Rodriguez',
@@ -228,7 +228,7 @@ const TravelPage: React.FC = () => {
       trip: 'Toronto Student Package',
       rating: 5,
       text: 'Great value for money! The accommodation they found was perfect and the airport transfer was so convenient.',
-      image: '/api/placeholder/60/60'
+      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&fit=crop&crop=face'
     },
     {
       name: 'Yuki Tanaka',
@@ -236,7 +236,7 @@ const TravelPage: React.FC = () => {
       trip: 'Berlin Cultural Experience',
       rating: 5,
       text: 'Not only did they handle all travel arrangements, but the cultural orientation helped me adapt quickly to German life.',
-      image: '/api/placeholder/60/60'
+      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=60&h=60&fit=crop&crop=face'
     }
   ];
 
@@ -532,13 +532,17 @@ const TravelPage: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="bg-white rounded-xl p-6 shadow-lg"
+                className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 <div className="flex items-center space-x-4 mb-4">
-                  <div className="w-12 h-12 bg-gray-300 rounded-full"></div>
+                  <img
+                    src={testimonial.image}
+                    alt={testimonial.name}
+                    className="w-14 h-14 rounded-full object-cover"
+                  />
                   <div>
                     <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
-                    <p className="text-sm text-gray-600">{testimonial.destination}</p>
+                    <p className="text-sm text-blue-600">{testimonial.destination}</p>
                     <p className="text-sm text-green-600">{testimonial.trip}</p>
                   </div>
                 </div>
@@ -547,9 +551,9 @@ const TravelPage: React.FC = () => {
                     <Star key={i} size={16} className="text-yellow-400 fill-current" />
                   ))}
                 </div>
-                <p className="text-gray-700 italic">&quot;{testimonial.text}&quot;</p>
+                <p className="text-gray-700 italic text-sm leading-relaxed">&quot;{testimonial.text}&quot;</p>
               </motion.div>
-            ))}
+            ))}}
           </div>
         </div>
       </section>

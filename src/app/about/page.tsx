@@ -56,7 +56,7 @@ const AboutPage: React.FC = () => {
       education: 'PhD Education Policy, Harvard',
       experience: '15+ years',
       specialization: 'US & UK Education Systems',
-      image: '/api/placeholder/150/150',
+      image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80',
       description: 'Former admissions officer at Harvard University with expertise in international student recruitment.'
     },
     {
@@ -65,7 +65,7 @@ const AboutPage: React.FC = () => {
       education: 'JD Immigration Law, NYU',
       experience: '12+ years',
       specialization: 'Immigration & Visa Law',
-      image: '/api/placeholder/150/150',
+      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80',
       description: 'Immigration lawyer specializing in student visas with 98% approval rate track record.'
     },
     {
@@ -74,7 +74,7 @@ const AboutPage: React.FC = () => {
       education: 'PhD Psychology, Oxford',
       experience: '10+ years',
       specialization: 'Academic Planning & Career Guidance',
-      image: '/api/placeholder/150/150',
+      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80',
       description: 'Educational psychologist helping students make informed decisions about their academic future.'
     },
     {
@@ -83,7 +83,7 @@ const AboutPage: React.FC = () => {
       education: 'MBA International Business',
       experience: '8+ years',
       specialization: 'International Travel & Logistics',
-      image: '/api/placeholder/150/150',
+      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80',
       description: 'Former airline executive with extensive experience in student travel arrangements worldwide.'
     }
   ];

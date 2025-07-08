@@ -232,7 +232,7 @@ const VisaPage: React.FC = () => {
       university: 'Stanford University',
       story: 'Initially rejected due to incomplete financial documentation. Our team helped restructure the application and secured approval on the second attempt.',
       timeline: 'Approved in 3 weeks',
-      image: '/api/placeholder/60/60'
+      image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=60&h=60&fit=crop&crop=face'
     },
     {
       name: 'James Wilson',
@@ -241,7 +241,7 @@ const VisaPage: React.FC = () => {
       university: 'University of Cambridge',
       story: 'Complex case involving previous visa refusal. Our interview coaching and document restructuring led to successful approval.',
       timeline: 'Approved in 4 weeks',
-      image: '/api/placeholder/60/60'
+      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=60&h=60&fit=crop&crop=face'
     },
     {
       name: 'Sofia Chen',
@@ -250,7 +250,7 @@ const VisaPage: React.FC = () => {
       university: 'University of Toronto',
       story: 'Rushed application with tight deadlines. Our emergency processing service secured the permit just in time for semester start.',
       timeline: 'Approved in 10 days',
-      image: '/api/placeholder/60/60'
+      image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=60&h=60&fit=crop&crop=face'
     }
   ];
 
@@ -569,10 +569,14 @@ const VisaPage: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="bg-white rounded-xl p-6 shadow-lg"
+                className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 <div className="flex items-center space-x-4 mb-4">
-                  <div className="w-12 h-12 bg-gray-300 rounded-full"></div>
+                  <img
+                    src={story.image}
+                    alt={story.name}
+                    className="w-14 h-14 rounded-full object-cover"
+                  />
                   <div>
                     <h4 className="font-semibold text-gray-900">{story.name}</h4>
                     <p className="text-sm text-gray-600 flex items-center space-x-1">
@@ -585,9 +589,9 @@ const VisaPage: React.FC = () => {
                 <div className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mb-4 inline-block">
                   {story.timeline}
                 </div>
-                <p className="text-gray-700 text-sm italic">&quot;{story.story}&quot;</p>
+                <p className="text-gray-700 text-sm italic leading-relaxed">&quot;{story.story}&quot;</p>
               </motion.div>
-            ))}
+            ))}}
           </div>
         </div>
       </section>
