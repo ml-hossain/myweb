@@ -117,72 +117,6 @@ const EducationPage: React.FC = () => {
     }
   ];
 
-  const testimonials = [
-    {
-      name: 'Alex Chen',
-      university: 'Stanford University',
-      program: 'Computer Science',
-      scholarship: '$45,000 scholarship',
-      text: 'The team helped me navigate the complex application process and secure a substantial scholarship. I couldn\'t have done it without their expertise.',
-      image: '/api/placeholder/60/60'
-    },
-    {
-      name: 'Priya Sharma',
-      university: 'University of Oxford',
-      program: 'Economics',
-      scholarship: 'Full tuition waiver',
-      text: 'From university selection to scholarship applications, they provided comprehensive support throughout my journey to Oxford.',
-      image: '/api/placeholder/60/60'
-    },
-    {
-      name: 'Mohammed Al-Rashid',
-      university: 'University of Toronto',
-      program: 'Engineering',
-      scholarship: '$30,000 scholarship',
-      text: 'Their personalized approach and attention to detail made all the difference in my successful application to UofT.',
-      image: '/api/placeholder/60/60'
-    }
-  ];
-
-  const process = [
-    {
-      step: 1,
-      title: 'Initial Consultation',
-      description: 'Free consultation to understand your goals, background, and preferences.',
-      duration: '1 hour'
-    },
-    {
-      step: 2,
-      title: 'Profile Assessment',
-      description: 'Comprehensive evaluation of your academic and extracurricular profile.',
-      duration: '2-3 days'
-    },
-    {
-      step: 3,
-      title: 'University Shortlisting',
-      description: 'Personalized list of universities based on your profile and preferences.',
-      duration: '1 week'
-    },
-    {
-      step: 4,
-      title: 'Application Strategy',
-      description: 'Detailed timeline and strategy for each application.',
-      duration: '3-5 days'
-    },
-    {
-      step: 5,
-      title: 'Document Preparation',
-      description: 'Assistance with essays, recommendations, and all required documents.',
-      duration: '2-4 weeks'
-    },
-    {
-      step: 6,
-      title: 'Application Submission',
-      description: 'Review and submission of all applications before deadlines.',
-      duration: '1 week'
-    }
-  ];
-
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -327,92 +261,6 @@ const EducationPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Process Section */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Process</h2>
-            <p className="text-xl text-gray-600">Step-by-step guidance to ensure your success</p>
-          </motion.div>
-
-          <div className="space-y-8">
-            {process.map((step, index) => (
-              <motion.div
-                key={step.step}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className={`flex items-center ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}
-              >
-                <div className="flex-1">
-                  <div className={`bg-white rounded-xl p-6 shadow-lg ${index % 2 === 0 ? 'mr-8' : 'ml-8'}`}>
-                    <div className="flex items-center space-x-4 mb-4">
-                      <div className="bg-blue-600 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold">
-                        {step.step}
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-semibold text-gray-900">{step.title}</h3>
-                        <p className="text-sm text-gray-500 flex items-center space-x-1">
-                          <Clock size={14} />
-                          <span>{step.duration}</span>
-                        </p>
-                      </div>
-                    </div>
-                    <p className="text-gray-600">{step.description}</p>
-                  </div>
-                </div>
-                <div className="w-px h-16 bg-blue-300"></div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Success Stories */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Success Stories</h2>
-            <p className="text-xl text-gray-600">Real students, real results</p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={testimonial.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="bg-white rounded-xl p-6 shadow-lg"
-              >
-                <div className="flex items-center space-x-4 mb-4">
-                  <div className="w-12 h-12 bg-gray-300 rounded-full"></div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
-                    <p className="text-sm text-gray-600">{testimonial.university}</p>
-                    <p className="text-sm text-blue-600">{testimonial.program}</p>
-                  </div>
-                </div>
-                <div className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mb-4 inline-block">
-                  {testimonial.scholarship}
-                </div>
-                <p className="text-gray-700 italic">&quot;{testimonial.text}&quot;</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
       <section className="py-20 bg-blue-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -429,19 +277,21 @@ const EducationPage: React.FC = () => {
               <Link href="/contact">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
-                  className="bg-yellow-400 text-blue-900 px-6 py-3 md:px-8 md:py-4 rounded-lg font-semibold text-base md:text-lg flex items-center justify-center space-x-2 hover:bg-yellow-300 transition-colors whitespace-nowrap"
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold flex items-center space-x-2 mx-auto sm:mx-0 hover:bg-gray-50 transition-all duration-200"
                 >
-                  <Calendar size={20} />
+                  <Calendar className="w-5 h-5" />
                   <span>Book Free Consultation</span>
                 </motion.button>
               </Link>
               <Link href="/about">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
-                  className="border-2 border-white text-white px-6 py-3 md:px-8 md:py-4 rounded-lg font-semibold text-base md:text-lg hover:bg-white hover:text-blue-600 transition-colors whitespace-nowrap"
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-yellow-400 text-blue-900 px-8 py-4 rounded-xl font-semibold flex items-center space-x-2 mx-auto sm:mx-0 hover:bg-yellow-300 transition-all duration-200"
                 >
                   <span>Learn More</span>
-                  <ArrowRight size={20} />
+                  <ArrowRight className="w-5 h-5" />
                 </motion.button>
               </Link>
             </div>

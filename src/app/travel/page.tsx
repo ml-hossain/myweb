@@ -555,7 +555,7 @@ const TravelPage: React.FC = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-green-600 text-white">
+      <section className="py-20 bg-white text-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -563,26 +563,28 @@ const TravelPage: React.FC = () => {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-4xl font-bold mb-4">Ready to Plan Your Journey?</h2>
-            <p className="text-xl text-green-100 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
               Let our travel experts create the perfect itinerary for your study abroad adventure.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
-                  className="bg-yellow-400 text-green-900 px-8 py-4 rounded-lg font-semibold text-lg flex items-center justify-center space-x-2 hover:bg-yellow-300 transition-colors"
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-green-600 text-white px-8 py-4 rounded-xl font-semibold flex items-center space-x-2 mx-auto sm:mx-0 hover:bg-green-700 transition-all duration-200"
                 >
-                  <MapPin size={20} />
+                  <MapPin className="w-5 h-5" />
                   <span>Start Planning</span>
                 </motion.button>
               </Link>
               <Link href="/visa">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
-                  className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-green-600 transition-colors"
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-yellow-400 text-blue-900 px-8 py-4 rounded-xl font-semibold flex items-center space-x-2 mx-auto sm:mx-0 hover:bg-yellow-300 transition-all duration-200"
                 >
                   <span>Check Visa Requirements</span>
-                  <ArrowRight size={20} />
+                  <ArrowRight className="w-5 h-5" />
                 </motion.button>
               </Link>
             </div>

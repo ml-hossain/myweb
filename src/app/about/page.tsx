@@ -88,60 +88,6 @@ const AboutPage: React.FC = () => {
     }
   ];
 
-  const timeline = [
-    {
-      year: '2015',
-      title: 'Foundation',
-      description: 'EduTravel was founded with a mission to make international education accessible to students worldwide.'
-    },
-    {
-      year: '2017',
-      title: 'First 1,000 Students',
-      description: 'Reached our first milestone of helping 1,000 students achieve their international education dreams.'
-    },
-    {
-      year: '2019',
-      title: 'Global Expansion',
-      description: 'Expanded operations to 25 countries and established partnerships with 200+ universities.'
-    },
-    {
-      year: '2021',
-      title: 'Digital Innovation',
-      description: 'Launched our comprehensive digital platform for virtual consultations and document management.'
-    },
-    {
-      year: '2023',
-      title: 'Industry Recognition',
-      description: 'Received "Best Education Consultancy" award and reached 10,000+ successful student placements.'
-    },
-    {
-      year: '2024',
-      title: 'Future Vision',
-      description: 'Expanding AI-powered services and sustainable education solutions for the next generation.'
-    }
-  ];
-
-  const testimonials = [
-    {
-      name: 'Alex Rodriguez',
-      role: 'MIT Graduate',
-      text: 'EduTravel made my impossible dream possible. Their guidance through every step was invaluable.',
-      rating: 5
-    },
-    {
-      name: 'Fatima Al-Rashid',
-      role: 'Oxford Student',
-      text: 'Professional, caring, and incredibly knowledgeable. They truly care about your success.',
-      rating: 5
-    },
-    {
-      name: 'Li Wei',
-      role: 'Stanford MBA',
-      text: 'From application to visa to settling in, they supported me throughout my entire journey.',
-      rating: 5
-    }
-  ];
-
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -359,80 +305,6 @@ const AboutPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Timeline */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Journey</h2>
-            <p className="text-xl text-gray-600">Milestones in our commitment to student success</p>
-          </motion.div>
-
-          <div className="relative">
-            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-blue-200"></div>
-            <div className="space-y-12">
-              {timeline.map((item, index) => (
-                <motion.div
-                  key={item.year}
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className={`flex items-center ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}
-                >
-                  <div className="flex-1">
-                    <div className={`bg-white rounded-xl p-6 shadow-lg ${index % 2 === 0 ? 'mr-8' : 'ml-8'}`}>
-                      <div className="text-blue-600 font-bold text-lg mb-2">{item.year}</div>
-                      <h3 className="text-xl font-semibold text-gray-900 mb-2">{item.title}</h3>
-                      <p className="text-gray-600">{item.description}</p>
-                    </div>
-                  </div>
-                  <div className="relative">
-                    <div className="bg-blue-600 w-4 h-4 rounded-full z-10 relative"></div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">What Our Alumni Say</h2>
-            <p className="text-xl text-gray-600">Success stories from students who trusted us with their dreams</p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={testimonial.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.15 }}
-                className="bg-white p-6 rounded-lg shadow-md"
-              >
-                <p className="text-gray-700 italic mb-4">{`"${testimonial.text}"`}</p>
-                <div>
-                  <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
-                  <p className="text-blue-600 text-sm">{testimonial.role}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
       <section className="py-20 bg-blue-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -449,19 +321,21 @@ const AboutPage: React.FC = () => {
               <Link href="/contact">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
-                  className="bg-yellow-400 text-blue-900 px-8 py-4 rounded-lg font-semibold text-lg flex items-center justify-center space-x-2 hover:bg-yellow-300 transition-colors"
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold flex items-center space-x-2 mx-auto sm:mx-0 hover:bg-gray-50 transition-all duration-200"
                 >
-                  <Mail size={20} />
                   <span>Contact Our Team</span>
+                  <Mail className="w-5 h-5" />
                 </motion.button>
               </Link>
               <Link href="/education">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
-                  className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-blue-600 transition-colors"
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-yellow-400 text-blue-900 px-8 py-4 rounded-xl font-semibold flex items-center space-x-2 mx-auto sm:mx-0 hover:bg-yellow-300 transition-all duration-200"
                 >
                   <span>Explore Our Services</span>
-                  <ArrowRight size={20} />
+                  <ArrowRight className="w-5 h-5" />
                 </motion.button>
               </Link>
             </div>

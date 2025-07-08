@@ -58,23 +58,29 @@ const HomePage: React.FC = () => {
     {
       name: 'Sarah Johnson',
       country: 'USA',
+      university: 'Oxford University',
+      program: 'Master\'s in International Relations',
       image: '/api/placeholder/80/80',
       rating: 5,
-      text: 'EduTravel made my dream of studying in Germany a reality. Their guidance was invaluable throughout the entire process.'
+      text: 'EduTravel made my dream of studying at Oxford a reality. Their scholarship guidance helped me secure a full scholarship, and their visa support was seamless.'
     },
     {
       name: 'Ahmad Rahman',
       country: 'Bangladesh',
+      university: 'MIT',
+      program: 'PhD in Computer Science',
       image: '/api/placeholder/80/80',
       rating: 5,
-      text: 'The visa application process was seamless with their expert help. I got my student visa approved in just 3 weeks!'
+      text: 'The team\'s expertise in STEM programs was incredible. They guided me through the entire application process and helped me get into my top choice university.'
     },
     {
       name: 'Maria Garcia',
       country: 'Spain',
+      university: 'University of Toronto',
+      program: 'Bachelor\'s in Business',
       image: '/api/placeholder/80/80',
       rating: 5,
-      text: 'From university selection to travel arrangements, they handled everything professionally. Highly recommended!'
+      text: 'From application to arrival, EduTravel supported me every step of the way. Their travel planning service made my transition to Canada so smooth.'
     },
   ];
 
@@ -300,24 +306,32 @@ const HomePage: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="bg-white rounded-xl p-6 shadow-lg"
+                className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                  <img
+                    src={testimonial.image}
+                    alt={testimonial.name}
+                    className="w-12 h-12 rounded-full object-cover mr-4"
+                  />
                   <div>
                     <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
+                    <p className="text-sm text-blue-600">{testimonial.university}</p>
                     <p className="text-gray-600 text-sm flex items-center">
                       <MapPin size={12} className="mr-1" />
                       {testimonial.country}
                     </p>
                   </div>
                 </div>
-                <div className="flex mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} size={16} className="text-yellow-400 fill-current" />
-                  ))}
+                <div className="mb-4">
+                  <div className="flex mb-2">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} size={16} className="text-yellow-400 fill-current" />
+                    ))}
+                  </div>
+                  <p className="text-xs text-gray-500">{testimonial.program}</p>
                 </div>
-                <p className="text-gray-700 italic">&quot;{testimonial.text}&quot;</p>
+                <p className="text-gray-700 italic text-sm leading-relaxed">&quot;{testimonial.text}&quot;</p>
               </motion.div>
             ))}
           </div>
