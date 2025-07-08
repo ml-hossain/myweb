@@ -204,7 +204,7 @@ const EducationPage: React.FC = () => {
               <Link href="/contact">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
-                  className="bg-yellow-400 text-blue-900 px-8 py-4 rounded-lg font-semibold text-lg flex items-center justify-center space-x-2 hover:bg-yellow-300 transition-colors"
+                  className="bg-yellow-400 text-blue-900 px-6 py-3 md:px-8 md:py-4 rounded-lg font-semibold text-base md:text-lg flex items-center justify-center space-x-2 hover:bg-yellow-300 transition-colors whitespace-nowrap"
                 >
                   <Calendar size={20} />
                   <span>Schedule Consultation</span>
@@ -212,7 +212,7 @@ const EducationPage: React.FC = () => {
               </Link>
               <motion.button
                 whileHover={{ scale: 1.05 }}
-                className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-blue-800 transition-colors"
+                className="border-2 border-white text-white px-6 py-3 md:px-8 md:py-4 rounded-lg font-semibold text-base md:text-lg hover:bg-white hover:text-blue-800 transition-colors whitespace-nowrap"
               >
                 <span>Download Guide</span>
               </motion.button>
@@ -429,7 +429,7 @@ const EducationPage: React.FC = () => {
               <Link href="/contact">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
-                  className="bg-yellow-400 text-blue-900 px-8 py-4 rounded-lg font-semibold text-lg flex items-center justify-center space-x-2 hover:bg-yellow-300 transition-colors"
+                  className="bg-yellow-400 text-blue-900 px-6 py-3 md:px-8 md:py-4 rounded-lg font-semibold text-base md:text-lg flex items-center justify-center space-x-2 hover:bg-yellow-300 transition-colors whitespace-nowrap"
                 >
                   <Calendar size={20} />
                   <span>Book Free Consultation</span>
@@ -438,7 +438,7 @@ const EducationPage: React.FC = () => {
               <Link href="/about">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
-                  className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-blue-600 transition-colors"
+                  className="border-2 border-white text-white px-6 py-3 md:px-8 md:py-4 rounded-lg font-semibold text-base md:text-lg hover:bg-white hover:text-blue-600 transition-colors whitespace-nowrap"
                 >
                   <span>Learn More</span>
                   <ArrowRight size={20} />

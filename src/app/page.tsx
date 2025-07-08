@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import TeamCarousel from '@/components/TeamCarousel';
 import { 
   GraduationCap, 
   Plane, 
@@ -81,22 +82,26 @@ const HomePage: React.FC = () => {
     {
       name: 'John Doe',
       role: 'CEO & Founder',
-      image: '/api/placeholder/120/120',
+      image: '/api/placeholder/400/400',
+      about: 'John leads the company with a vision for global education access. With 15+ years in the industry, he ensures every student gets the best guidance.'
     },
     {
       name: 'Jane Smith',
       role: 'Head of Education',
-      image: '/api/placeholder/120/120',
+      image: '/api/placeholder/400/400',
+      about: 'Jane specializes in university admissions and scholarship strategies, helping thousands of students achieve their academic dreams.'
     },
     {
       name: 'Peter Jones',
       role: 'Lead Travel Consultant',
-      image: '/api/placeholder/120/120',
+      image: '/api/placeholder/400/400',
+      about: 'Peter crafts seamless travel experiences for students, from flights to accommodation, ensuring a stress-free journey abroad.'
     },
     {
-        name: 'Samuel Green',
-        role: 'Visa Expert',
-        image: '/api/placeholder/120/120',
+      name: 'Samuel Green',
+      role: 'Visa Expert',
+      image: '/api/placeholder/400/400',
+      about: 'Samuel is a visa specialist with a 98% approval rate, guiding students through every step of the application process.'
     }
   ];
 
@@ -126,7 +131,7 @@ const HomePage: React.FC = () => {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="bg-yellow-400 text-blue-900 px-8 py-4 rounded-lg font-semibold text-lg flex items-center justify-center space-x-2 hover:bg-yellow-300 transition-colors"
+                    className="bg-yellow-400 text-blue-900 px-6 py-3 md:px-8 md:py-4 rounded-lg font-semibold text-base md:text-lg flex items-center justify-center space-x-2 hover:bg-yellow-300 transition-colors whitespace-nowrap"
                   >
                     <BookOpen size={20} />
                     <span>Explore Education</span>
@@ -136,7 +141,7 @@ const HomePage: React.FC = () => {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg flex items-center justify-center space-x-2 hover:bg-white hover:text-blue-800 transition-colors"
+                    className="border-2 border-white text-white px-6 py-3 md:px-8 md:py-4 rounded-lg font-semibold text-base md:text-lg flex items-center justify-center space-x-2 hover:bg-white hover:text-blue-800 transition-colors whitespace-nowrap"
                   >
                     <span>Get Consultation</span>
                     <ArrowRight size={20} />
@@ -247,7 +252,7 @@ const HomePage: React.FC = () => {
                     <Link href={service.link}>
                       <motion.button
                         whileHover={{ scale: 1.05 }}
-                        className="w-full bg-gray-900 text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors"
+                        className="w-full bg-gray-900 text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors whitespace-nowrap"
                       >
                         Learn More
                       </motion.button>
@@ -261,7 +266,10 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* Team Section */}
-      <section className="py-20">
+      <TeamCarousel team={team} />
+
+      {/* Testimonials Section */}
+      <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -269,7 +277,30 @@ const HomePage: React.FC = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Meet Our Experts</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">What Our Students Say</h2>
+            <p className="text-xl text-gray-600">Real experiences from students who achieved their dreams</p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <motion.div
+                key={testimonial.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                className="bg-white rounded-xl p-6 shadow-lg"
+              >
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
+                    <p className="text-gray-600 text-sm flex items-center">
+                      <MapPin size={12} className="mr-1" />
+                      {testimonial.country}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <Star key={i} size={16} className="text-yellow-400 fill-current" />
                   ))}
@@ -289,29 +320,29 @@ const HomePage: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-4xl font-bold mb-4">Ready to Start Your Journey?</h2>
-            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-              Take the first step towards your international education dreams. 
-              Get personalized guidance from our expert consultants.
+            <h2 className="text-4xl font-bold mb-4">Begin Your Adventure Today</h2>
+            <p className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
+              Your global education and travel journey starts here. Connect with our expert consultants for personalized guidance and unlock a world of opportunities. Let's build your future together.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-yellow-400 text-blue-900 px-8 py-4 rounded-lg font-semibold text-lg flex items-center justify-center space-x-2 hover:bg-yellow-300 transition-colors"
+                  className="bg-yellow-400 text-blue-900 px-6 py-3 md:px-8 md:py-4 rounded-lg font-semibold text-base md:text-lg flex items-center justify-center space-x-2 hover:bg-yellow-300 transition-colors whitespace-nowrap"
                 >
-                  <Clock size={20} />
-                  <span>Book Free Consultation</span>
+                  <Users size={20} />
+                  <span>Request a Callback</span>
                 </motion.button>
               </Link>
-              <Link href="/about">
+              <Link href="/university">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-blue-600 transition-colors"
+                  className="border-2 border-white text-white px-6 py-3 md:px-8 md:py-4 rounded-lg font-semibold text-base md:text-lg hover:bg-white hover:text-blue-600 transition-colors flex items-center justify-center space-x-2 whitespace-nowrap"
                 >
-                  Learn About Us
+                  <Globe size={20} />
+                  <span>View Universities</span>
                 </motion.button>
               </Link>
             </div>
