@@ -99,7 +99,7 @@ const AboutPage: React.FC = () => {
             transition={{ duration: 0.8 }}
             className="text-center"
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">About EduTravel</h1>
+            <h1 className="text-4xl md:text-6xl font-bold mb-6">About NextGen EduMirate Solutions</h1>
             <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
               Empowering students worldwide to achieve their international education dreams through 
               personalized guidance, expert support, and unwavering commitment to success.
@@ -315,7 +315,7 @@ const AboutPage: React.FC = () => {
           >
             <h2 className="text-4xl font-bold mb-4">Ready to Start Your Journey?</h2>
             <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-              Join thousands of successful students who trusted EduTravel with their international education dreams.
+              Join thousands of successful students who trusted NextGen EduMirate Solutions with their international education dreams.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact">

@@ -10,7 +10,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "EduTravel - Education & Travel Services",
+  title: "NextGen EduMirate Solutions - Education & Travel Services",
   description: "Your trusted partner for education abroad and travel services. We help you achieve your dreams of studying and traveling worldwide.",
   keywords: "education, travel, visa services, study abroad, scholarships, university admissions",
 };
@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} font-sans antialiased`} suppressHydrationWarning={true}>
         <Navbar />
         <main className="min-h-screen">
           {children}

@@ -1,4 +1,4 @@
-# EduTravel - Education & Travel Services Website
+# NextGen EduMirate Solutions - Education & Travel Services Website
 
 A modern, minimal website for education and travel services built with Next.js 14, React, TypeScript, Tailwind CSS, and Framer Motion.
 

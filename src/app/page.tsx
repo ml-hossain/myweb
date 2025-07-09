@@ -62,7 +62,7 @@ const HomePage: React.FC = () => {
       program: 'Master\'s in International Relations',
       image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80&q=80',
       rating: 5,
-      text: 'EduTravel made my dream of studying at Oxford a reality. Their scholarship guidance helped me secure a full scholarship, and their visa support was seamless.'
+      text: 'NextGen EduMirate Solutions made my dream of studying at Oxford a reality. Their scholarship guidance helped me secure a full scholarship, and their visa support was seamless.'
     },
     {
       name: 'Ahmad Rahman',
@@ -80,7 +80,7 @@ const HomePage: React.FC = () => {
       program: 'Bachelor\'s in Business',
       image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80&q=80',
       rating: 5,
-      text: 'From application to arrival, EduTravel supported me every step of the way. Their travel planning service made my transition to Canada so smooth.'
+      text: 'From application to arrival, NextGen EduMirate Solutions supported me every step of the way. Their travel planning service made my transition to Canada so smooth.'
     },
   ];
 
@@ -89,7 +89,7 @@ const HomePage: React.FC = () => {
       name: 'Dr. Muhammad Rahman',
       role: 'CEO & Founder',
       image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
-      about: 'Dr. Muhammad Rahman is the visionary founder of EduTravel with over 18 years of experience in international education consulting. He holds a PhD in Educational Leadership from Harvard University and has personally guided over 5,000 students to achieve their dreams of studying abroad. His expertise spans across university admissions, scholarship strategies, and global education trends. Under his leadership, EduTravel has maintained a 98% success rate in student placements and has established partnerships with over 500 universities worldwide. Dr. Rahman is a sought-after speaker at international education conferences and has authored multiple research papers on cross-cultural education adaptation.'
+      about: 'Dr. Muhammad Rahman is the visionary founder of NextGen EduMirate Solutions with over 18 years of experience in international education consulting. He holds a PhD in Educational Leadership from Harvard University and has personally guided over 5,000 students to achieve their dreams of studying abroad. His expertise spans across university admissions, scholarship strategies, and global education trends. Under his leadership, NextGen EduMirate Solutions has maintained a 98% success rate in student placements and has established partnerships with over 500 universities worldwide. Dr. Rahman is a sought-after speaker at international education conferences and has authored multiple research papers on cross-cultural education adaptation.'
     },
     {
       name: 'Sarah Johnson',
@@ -119,7 +119,7 @@ const HomePage: React.FC = () => {
       name: 'Dr. Priya Sharma',
       role: 'Academic Advisor & Research Specialist',
       image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
-      about: 'Dr. Priya Sharma is our academic advisor specializing in STEM programs and research opportunities. She holds a PhD in Computer Science from MIT and has worked as a professor at leading universities before joining EduTravel. Dr. Sharma has extensive knowledge of research programs, graduate assistantships, and academic funding opportunities across top-tier institutions. She has helped over 2,500 students identify the perfect academic programs aligned with their career goals and has a particular expertise in emerging fields like AI, data science, and biotechnology. Her network of academic contacts spans across 40+ countries, enabling her to provide insider insights into program selection and research opportunities that significantly enhance students\' academic and career prospects.'
+      about: 'Dr. Priya Sharma is our academic advisor specializing in STEM programs and research opportunities. She holds a PhD in Computer Science from MIT and has worked as a professor at leading universities before joining NextGen EduMirate Solutions. Dr. Sharma has extensive knowledge of research programs, graduate assistantships, and academic funding opportunities across top-tier institutions. She has helped over 2,500 students identify the perfect academic programs aligned with their career goals and has a particular expertise in emerging fields like AI, data science, and biotechnology. Her network of academic contacts spans across 40+ countries, enabling her to provide insider insights into program selection and research opportunities that significantly enhance students\' academic and career prospects.'
     }
   ];
 
@@ -251,23 +251,23 @@ const HomePage: React.FC = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.2 }}
                   whileHover={{ y: -10 }}
-                  className="bg-white rounded-xl shadow-lg overflow-hidden"
+                  className="bg-white rounded-xl shadow-lg overflow-hidden h-full flex flex-col"
                 >
                   <div className={`${service.color} p-6 text-white`}>
                     <Icon size={48} className="mb-4" />
                     <h3 className="text-2xl font-semibold mb-2">{service.title}</h3>
                     <p className="text-blue-100">{service.description}</p>
                   </div>
-                  <div className="p-6">
-                    <ul className="space-y-3 mb-6">
+                  <div className="p-6 flex-1 flex flex-col">
+                    <ul className="space-y-3 mb-6 flex-1">
                       {service.features.map((feature) => (
                         <li key={feature} className="flex items-center space-x-2">
-                          <CheckCircle size={16} className="text-green-500" />
+                          <CheckCircle size={16} className="text-green-500 flex-shrink-0" />
                           <span className="text-gray-700">{feature}</span>
                         </li>
                       ))}
                     </ul>
-                    <Link href={service.link}>
+                    <Link href={service.link} className="mt-auto">
                       <motion.button
                         whileHover={{ scale: 1.05 }}
                         className="w-full bg-gray-900 text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors whitespace-nowrap"

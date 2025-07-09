@@ -1,0 +1,71 @@
+<svg width="800" height="200" viewBox="0 0 800 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Graduation cap above NEMS -->
+  <g transform="translate(400, 30)">
+    <!-- Cap shadow -->
+    <path d="M-60 20 L60 35 L60 50 L-30 40 Q-50 35 -60 20 Z" fill="#1e3a8a" opacity="0.6"/>
+    
+    <!-- Main cap -->
+    <path d="M-65 15 L65 30 L65 45 L-35 35 Q-55 30 -65 15 Z" fill="#2563eb"/>
+    
+    <!-- Cap top flat part -->
+    <ellipse cx="0" cy="22.5" rx="65" ry="15" fill="#3b82f6"/>
+    
+    <!-- Cap tassel -->
+    <circle cx="45" cy="22" r="3" fill="#1e3a8a"/>
+    <line x1="45" y1="25" x2="45" y2="35" stroke="#1e3a8a" stroke-width="2"/>
+    <polygon points="43,35 47,35 45,40" fill="#1e3a8a"/>
+  </g>
+  
+  <!-- NEMS Letters -->
+  <g transform="translate(50, 80)">
+    <!-- N with tie detail -->
+    <g fill="#1e3a8a">
+      <!-- Left vertical -->
+      <rect x="0" y="0" width="25" height="100" rx="5"/>
+      <!-- Right vertical -->
+      <rect x="85" y="0" width="25" height="100" rx="5"/>
+      <!-- Diagonal -->
+      <rect x="20" y="20" width="75" height="20" rx="5" transform="rotate(25 57.5 30)"/>
+      <!-- Tie on N -->
+      <ellipse cx="12.5" cy="30" rx="8" ry="12" fill="#4b5563"/>
+      <rect x="8.5" y="42" width="8" height="25" fill="#4b5563"/>
+    </g>
+    
+    <!-- E -->
+    <g fill="#3b82f6" transform="translate(150, 0)">
+      <!-- Vertical bar -->
+      <rect x="0" y="0" width="25" height="100" rx="5"/>
+      <!-- Top horizontal -->
+      <rect x="0" y="0" width="80" height="22" rx="5"/>
+      <!-- Middle horizontal -->
+      <rect x="0" y="39" width="65" height="22" rx="5"/>
+      <!-- Bottom horizontal -->
+      <rect x="0" y="78" width="85" height="22" rx="5"/>
+    </g>
+    
+    <!-- M -->
+    <g fill="#1e3a8a" transform="translate(280, 0)">
+      <!-- Left vertical -->
+      <rect x="0" y="0" width="25" height="100" rx="5"/>
+      <!-- Right vertical -->
+      <rect x="85" y="0" width="25" height="100" rx="5"/>
+      <!-- Left diagonal -->
+      <rect x="20" y="0" width="25" height="60" rx="5" transform="rotate(15 32.5 30)"/>
+      <!-- Right diagonal -->
+      <rect x="65" y="0" width="25" height="60" rx="5" transform="rotate(-15 77.5 30)"/>
+    </g>
+    
+    <!-- S -->
+    <g fill="#3b82f6" transform="translate(430, 0)">
+      <!-- Top curve -->
+      <path d="M0 22 L85 22 Q100 22 100 37 L100 39 Q100 54 85 54 L25 54 Q10 54 10 69 L10 71 Q10 86 25 86 L85 86 Q100 86 100 101 L85 101 L25 101 Q0 101 0 86 L0 61 Q0 46 15 46 L75 46 Q90 46 90 31 L90 29 Q90 14 75 14 L15 14 Q0 14 0 29 L0 22 Z" fill="#3b82f6"/>
+    </g>
+  </g>
+  
+  <!-- Company name -->
+  <text x="400" y="165" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#1e3a8a">NextGen Edu-Migrate Solutions</text>
+  
+  <!-- Decorative lines -->
+  <line x1="50" y1="175" x2="200" y2="175" stroke="#3b82f6" stroke-width="4"/>
+  <line x1="600" y1="175" x2="750" y2="175" stroke="#3b82f6" stroke-width="4"/>
+</svg>

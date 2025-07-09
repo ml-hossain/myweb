@@ -53,7 +53,7 @@ const ContactPage = () => {
     {
       icon: <Mail className="w-6 h-6" />,
       title: "Email",
-      details: ["info@edutravel.com", "support@edutravel.com"],
+      details: ["info@nextgenedumirate.com", "support@nextgenedumirate.com"],
       description: "Send us your questions anytime"
     },
     {
@@ -75,21 +75,21 @@ const ContactPage = () => {
       city: "New York",
       address: "123 Education Street, Learning City, LC 12345",
       phone: "+1 (555) 123-4567",
-      email: "ny@edutravel.com",
+      email: "ny@nextgenedumirate.com",
       hours: "Mon-Fri: 9AM-6PM"
     },
     {
       city: "Los Angeles",
       address: "456 Travel Boulevard, Adventure City, AC 67890",
       phone: "+1 (555) 987-6543",
-      email: "la@edutravel.com",
+      email: "la@nextgenedumirate.com",
       hours: "Mon-Fri: 8AM-5PM"
     },
     {
       city: "London",
       address: "789 Study Lane, Knowledge Town, KT 11223",
       phone: "+44 20 1234 5678",
-      email: "london@edutravel.com",
+      email: "london@nextgenedumirate.com",
       hours: "Mon-Fri: 9AM-5PM GMT"
     }
   ];

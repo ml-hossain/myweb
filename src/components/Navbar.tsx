@@ -25,9 +25,13 @@ const Navbar: React.FC = () => {
             <Link href="/" className="flex-shrink-0">
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="text-2xl font-bold text-blue-600"
+                className="flex items-center"
               >
-                EduTravel
+                <img 
+                  src="/logo.png" 
+                  alt="NextGen EduMirate Solutions" 
+                  className="h-12 w-auto"
+                />
               </motion.div>
             </Link>
           </div>

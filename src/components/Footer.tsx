@@ -1,17 +1,11 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 
 const Footer: React.FC = () => {
-  const [isClient, setIsClient] = useState(false);
   const currentYear = 2025; // Static year to avoid hydration mismatch
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
 
   const quickLinks = [
     { name: 'Education Services', href: '/education' },
@@ -41,20 +35,16 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-4">
-            {isClient ? (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="text-2xl font-bold text-blue-400"
-              >
-                EduTravel
-              </motion.div>
-            ) : (
-              <div className="text-2xl font-bold text-blue-400">
-                EduTravel
-              </div>
-            )}
+            <div className="flex items-center space-x-2">
+              <img 
+                src="/logo.png" 
+                alt="NextGen EduMirate Solutions" 
+                className="h-8 w-auto"
+              />
+              <span className="text-xl font-bold text-blue-400">
+                NextGen EduMirate Solutions
+              </span>
+            </div>
             <p className="text-gray-300">
               Your trusted partner for education abroad and travel services. We help you achieve your dreams of studying and traveling worldwide.
             </p>
@@ -65,7 +55,7 @@ const Footer: React.FC = () => {
               </div>
               <div className="flex items-center space-x-2">
                 <Mail size={16} className="text-blue-400" />
-                <span className="text-sm">info@edutravel.com</span>
+                <span className="text-sm">info@nextgenedumirate.com</span>
               </div>
               <div className="flex items-center space-x-2">
                 <MapPin size={16} className="text-blue-400" />
@@ -76,20 +66,9 @@ const Footer: React.FC = () => {
 
           {/* Quick Links */}
           <div className="space-y-4">
-            {isClient ? (
-              <motion.h3
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-lg font-semibold text-blue-400"
-              >
-                Quick Links
-              </motion.h3>
-            ) : (
-              <h3 className="text-lg font-semibold text-blue-400">
-                Quick Links
-              </h3>
-            )}
+            <h3 className="text-lg font-semibold text-blue-400">
+              Quick Links
+            </h3>
             <ul className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.name}>
@@ -148,7 +127,7 @@ const Footer: React.FC = () => {
         {/* Bottom Border */}
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-gray-400 text-sm">
-            © {currentYear} EduTravel. All rights reserved. | Privacy Policy | Terms of Service
+            © {currentYear} NextGen EduMirate Solutions. All rights reserved. | Privacy Policy | Terms of Service
           </p>
         </div>
       </div>
