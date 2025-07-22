@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
   Mail, 
   Phone, 
@@ -15,6 +16,12 @@ import {
   CheckCircle,
   ArrowRight
 } from 'lucide-react';
+import Button from '@/components/Button';
+
+// Register ScrollTrigger plugin
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -26,6 +33,73 @@ const ContactPage = () => {
     message: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const heroRef = useRef<HTMLDivElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Hero section animations
+      gsap.fromTo(
+        ".hero-content",
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
+      );
+
+      // Contact info cards
+      gsap.fromTo(
+        ".contact-card",
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: ".contact-cards",
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+
+      // Form animations
+      gsap.fromTo(
+        ".form-section",
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          scrollTrigger: {
+            trigger: formRef.current,
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+
+      // Office locations
+      gsap.fromTo(
+        ".office-card",
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: ".office-locations",
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+
+    });
+
+    return () => ctx.revert();
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -35,12 +109,40 @@ const ContactPage = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // TODO: Implement form submission logic
-    console.log('Form submitted:', formData);
-    setIsSubmitted(true);
-    setTimeout(() => setIsSubmitted(false), 3000);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault(); // Prevent page refresh
+    
+    setIsSubmitting(true);
+    
+    // Simulate API call - replace with your actual submission logic
+    try {
+      await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate network delay
+      
+      console.log('Form submitted:', formData);
+      
+      // Reset form after successful submission
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        service: '',
+        subject: '',
+        message: ''
+      });
+      
+      setIsSubmitted(true);
+      
+      // Show success message for 3 seconds
+      setTimeout(() => {
+        setIsSubmitted(false);
+      }, 3000);
+      
+    } catch (error) {
+      console.error('Form submission error:', error);
+      // Handle error state here
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
@@ -101,12 +203,7 @@ const ContactPage = () => {
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-blue-600 via-blue-700 to-purple-800 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center"
-          >
+          <div className="hero-content text-center">
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
               Get In <span className="text-yellow-400">Touch</span>
             </h1>
@@ -114,21 +211,18 @@ const ContactPage = () => {
               Ready to start your educational journey? Our expert team is here to guide you 
               every step of the way. Contact us today for personalized assistance.
             </p>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Contact Info Cards */}
       <section className="py-16 -mt-12 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="contact-cards grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {contactInfo.map((info, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
+                className="contact-card bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 mb-4">
                   {info.icon}
@@ -140,7 +234,7 @@ const ContactPage = () => {
                   ))}
                 </div>
                 <p className="text-xs text-gray-500">{info.description}</p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -149,24 +243,17 @@ const ContactPage = () => {
       {/* Contact Form */}
       <section className="py-16 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-12"
-          >
+          <div className="form-section text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Send Us a Message</h2>
             <p className="text-lg text-gray-600">
               Fill out the form below and we'll get back to you within 24 hours
             </p>
-          </motion.div>
+          </div>
 
-          <motion.form
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+          <form
+            ref={formRef}
             onSubmit={handleSubmit}
-            className="bg-gray-50 rounded-2xl p-8 shadow-lg"
+            className="form-section bg-gray-50 rounded-2xl p-8 shadow-lg"
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <div>
@@ -181,7 +268,7 @@ const ContactPage = () => {
                   onChange={handleInputChange}
                   autoComplete="name"
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white text-gray-900 placeholder-gray-500"
                   placeholder="Enter your full name"
                 />
               </div>
@@ -198,7 +285,7 @@ const ContactPage = () => {
                   autoComplete="email"
                   required
                   suppressHydrationWarning
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white text-gray-900 placeholder-gray-500"
                   placeholder="Enter your email address"
                 />
               </div>
@@ -216,7 +303,7 @@ const ContactPage = () => {
                   value={formData.phone}
                   onChange={handleInputChange}
                   autoComplete="tel"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white text-gray-900 placeholder-gray-500"
                   placeholder="Enter your phone number"
                 />
               </div>
@@ -230,7 +317,7 @@ const ContactPage = () => {
                   value={formData.service}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white text-gray-900"
                 >
                   <option value="">Select a service</option>
                   <option value="education">Education Consulting</option>
@@ -253,7 +340,7 @@ const ContactPage = () => {
                 value={formData.subject}
                 onChange={handleInputChange}
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white text-gray-900 placeholder-gray-500"
                 placeholder="Brief subject line"
               />
             </div>
@@ -269,60 +356,44 @@ const ContactPage = () => {
                 onChange={handleInputChange}
                 required
                 rows={6}
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none"
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none bg-white text-gray-900 placeholder-gray-500"
                 placeholder="Tell us about your goals, timeline, and how we can help you..."
               />
             </div>
 
-            <motion.button
-              type="submit"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className={`w-full py-4 px-6 rounded-xl font-semibold flex items-center justify-center space-x-2 transition-all duration-200 ${
-                isSubmitted 
-                  ? 'bg-green-600 text-white' 
-                  : 'bg-blue-600 text-white hover:bg-blue-700'
-              }`}
-            >
-              {isSubmitted ? (
-                <>
-                  <CheckCircle className="w-5 h-5" />
-                  <span>Message Sent!</span>
-                </>
-              ) : (
-                <>
-                  <Send className="w-5 h-5" />
-                  <span>Send Message</span>
-                </>
-              )}
-            </motion.button>
-          </motion.form>
+            <div className="mt-8 pt-4 border-t border-gray-200">
+              <Button
+                type="submit"
+                variant={isSubmitted ? "success" : "primary"}
+                size="lg"
+                icon={isSubmitted ? CheckCircle : Send}
+                fullWidth
+                loading={isSubmitting}
+                disabled={isSubmitting || isSubmitted}
+                className="py-4 px-8 text-lg font-semibold bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl transform transition-all duration-300 hover:scale-105 active:scale-95 rounded-xl"
+              >
+                {isSubmitted ? '✅ Message Sent Successfully!' : isSubmitting ? '⏳ Sending Message...' : '📤 Send Message'}
+              </Button>
+            </div>
+          </form>
         </div>
       </section>
 
       {/* Office Locations */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-12"
-          >
+          <div className="office-locations text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Office Locations</h2>
             <p className="text-lg text-gray-600">
               Visit us at any of our global offices for in-person consultation
             </p>
-          </motion.div>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="office-locations grid grid-cols-1 md:grid-cols-3 gap-8">
             {officeLocations.map((office, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
+                className="office-card bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 <div className="flex items-center mb-4">
                   <Building2 className="w-6 h-6 text-blue-600 mr-3" />
@@ -346,46 +417,12 @@ const ContactPage = () => {
                     <p className="text-gray-600 text-sm">{office.hours}</p>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="py-16 bg-gradient-to-br from-blue-600 via-blue-700 to-purple-800 text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="text-4xl font-bold mb-6">Ready to Start Your Journey?</h2>
-            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-              Schedule a free consultation with our experts and take the first step 
-              towards achieving your educational and travel goals.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold flex items-center space-x-2 mx-auto sm:mx-0 hover:bg-gray-50 transition-all duration-200"
-              >
-                <span>Contact Our Team</span>
-                <Mail className="w-5 h-5" />
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-yellow-400 text-blue-900 px-8 py-4 rounded-xl font-semibold flex items-center space-x-2 mx-auto sm:mx-0 hover:bg-yellow-300 transition-all duration-200"
-              >
-                <span>Explore Our Services</span>
-                <ArrowRight className="w-5 h-5" />
-              </motion.button>
-            </div>
-          </motion.div>
-        </div>
-      </section>
     </div>
   );
 };

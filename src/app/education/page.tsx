@@ -1,301 +1,324 @@
 'use client';
 
-import React from 'react';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
+import React, { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
-  GraduationCap,
   BookOpen,
-  Award,
-  FileText,
-  Clock,
+  Users,
+  Target,
+  Lightbulb,
+  Star,
   CheckCircle,
   ArrowRight,
-  Globe,
-  DollarSign,
-  Calendar
+  Calendar,
+  TrendingUp,
+  Award
 } from 'lucide-react';
+import Button from '@/components/Button';
+
+// Register ScrollTrigger plugin
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const EducationPage: React.FC = () => {
-  const services = [
-    {
-      icon: GraduationCap,
-      title: 'University Admissions',
-      description: 'Complete guidance for university applications and admissions process.',
-      features: [
-        'University selection and shortlisting',
-        'Application form assistance',
-        'Personal statement writing',
-        'Recommendation letter guidance',
-        'Portfolio preparation',
-        'Interview preparation'
-      ],
-    },
-    {
-      icon: Award,
-      title: 'Scholarship Guidance',
-      description: 'Find and apply for scholarships to fund your education abroad.',
-      features: [
-        'Scholarship research and matching',
-        'Application strategy development',
-        'Essay and proposal writing',
-        'Financial aid consultation',
-        'Merit scholarship applications',
-        'Need-based aid guidance'
-      ],
-    },
+  const heroRef = useRef<HTMLDivElement>(null);
+  const programsRef = useRef<HTMLDivElement>(null);
+  const benefitsRef = useRef<HTMLDivElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Hero section animations
+      gsap.fromTo(
+        ".hero-content",
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
+      );
+
+      // Programs section animations
+      gsap.fromTo(
+        ".programs-header",
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          scrollTrigger: {
+            trigger: programsRef.current,
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+
+      gsap.fromTo(
+        ".program-card",
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.15,
+          scrollTrigger: {
+            trigger: ".program-card",
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+
+      // Benefits section animations
+      gsap.fromTo(
+        ".benefit-card",
+        { opacity: 0, x: -30 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.6,
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: benefitsRef.current,
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+
+      // CTA section animations
+      gsap.fromTo(
+        ".cta-content",
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          scrollTrigger: {
+            trigger: ctaRef.current,
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+    });
+
+    return () => ctx.revert();
+  }, []);
+
+  const programs = [
     {
       icon: BookOpen,
-      title: 'Course Selection',
-      description: 'Expert advice on choosing the right courses and programs.',
+      title: 'Academic Excellence',
+      description: 'Comprehensive programs designed to enhance learning outcomes and academic performance.',
       features: [
-        'Program evaluation and comparison',
-        'Career pathway planning',
-        'Credit transfer assessment',
-        'Prerequisites analysis',
-        'Course scheduling assistance',
-        'Academic planning'
+        'Personalized learning paths',
+        'Expert faculty guidance',
+        'Interactive study materials',
+        'Regular progress assessments',
+        'Peer collaboration opportunities',
+        'Academic skill development'
       ],
     },
     {
-      icon: FileText,
-      title: 'Document Preparation',
-      description: 'Professional assistance with all required documentation.',
+      icon: Users,
+      title: 'Leadership Training',
+      description: 'Develop essential leadership skills and prepare for future career advancement.',
       features: [
-        'Document checklist creation',
-        'Transcript evaluation',
-        'Certificate authentication',
-        'Translation services',
-        'Notarization assistance',
-        'Document organization'
+        'Leadership workshops',
+        'Team management training',
+        'Communication skills development',
+        'Project leadership experience',
+        'Mentorship programs',
+        'Industry networking events'
+      ],
+    },
+    {
+      icon: Target,
+      title: 'Career Preparation',
+      description: 'Strategic career planning and professional development for future success.',
+      features: [
+        'Career counseling sessions',
+        'Industry insights and trends',
+        'Resume and portfolio building',
+        'Interview preparation',
+        'Professional networking',
+        'Job placement assistance'
+      ],
+    },
+    {
+      icon: Lightbulb,
+      title: 'Innovation & Research',
+      description: 'Foster creativity and research skills through hands-on projects and innovation labs.',
+      features: [
+        'Research methodology training',
+        'Innovation lab access',
+        'Project-based learning',
+        'Patent and publication support',
+        'Industry collaboration',
+        'Technology integration'
       ],
     }
   ];
 
-  const destinations = [
+  const benefits = [
     {
-      country: 'United States',
-      universities: '4,000+',
-      scholarships: '500+',
-      avgCost: '$35,000/year',
-      popular: ['Harvard', 'MIT', 'Stanford', 'Yale']
+      icon: TrendingUp,
+      title: '95% Success Rate',
+      description: 'Our students consistently achieve their academic and career goals'
     },
     {
-      country: 'United Kingdom',
-      universities: '160+',
-      scholarships: '200+',
-      avgCost: '£25,000/year',
-      popular: ['Oxford', 'Cambridge', 'Imperial', 'UCL']
+      icon: Users,
+      title: 'Expert Faculty',
+      description: 'Learn from industry professionals and academic experts'
     },
     {
-      country: 'Canada',
-      universities: '100+',
-      scholarships: '300+',
-      avgCost: 'CAD 30,000/year',
-      popular: ['Toronto', 'UBC', 'McGill', 'Waterloo']
+      icon: Award,
+      title: 'Recognized Certification',
+      description: 'Earn certificates valued by top employers worldwide'
     },
     {
-      country: 'Australia',
-      universities: '40+',
-      scholarships: '150+',
-      avgCost: 'AUD 35,000/year',
-      popular: ['Melbourne', 'Sydney', 'ANU', 'UNSW']
-    },
-    {
-      country: 'Germany',
-      universities: '400+',
-      scholarships: '100+',
-      avgCost: '€500/year',
-      popular: ['TUM', 'LMU', 'Heidelberg', 'RWTH']
-    },
-    {
-      country: 'Netherlands',
-      universities: '14+',
-      scholarships: '50+',
-      avgCost: '€12,000/year',
-      popular: ['TU Delft', 'Amsterdam', 'Utrecht', 'Leiden']
+      icon: Star,
+      title: 'Premium Resources',
+      description: 'Access to cutting-edge learning materials and technology'
     }
   ];
 
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 text-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center"
-          >
-            <GraduationCap size={80} className="mx-auto mb-6 text-yellow-400" />
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">Education Services</h1>
-            <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
-              Transform your academic dreams into reality with our comprehensive education consulting services. 
-              From university selection to scholarship applications, we guide you every step of the way.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-yellow-400 text-blue-900 px-6 py-3 md:px-8 md:py-4 rounded-lg font-semibold text-base md:text-lg flex items-center justify-center space-x-2 hover:bg-yellow-300 transition-colors whitespace-nowrap"
-                >
-                  <Calendar size={20} />
-                  <span>Schedule Consultation</span>
-                </motion.button>
-              </Link>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                className="border-2 border-white text-white px-6 py-3 md:px-8 md:py-4 rounded-lg font-semibold text-base md:text-lg hover:bg-white hover:text-blue-800 transition-colors whitespace-nowrap"
-              >
-                <span>Download Guide</span>
-              </motion.button>
+      <section className="relative bg-gradient-to-br from-indigo-600 via-purple-700 to-pink-600 text-white py-16 md:py-20 lg:py-24 overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-black/30"></div>
+          <div className="absolute top-20 left-20 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 right-20 w-80 h-80 bg-yellow-400/10 rounded-full blur-3xl"></div>
+        </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="hero-content text-center">
+            <div className="mb-6 md:mb-8">
+              <div className="inline-flex items-center justify-center w-20 h-20 md:w-24 md:h-24 bg-white/20 rounded-full backdrop-blur-sm mb-4 md:mb-6">
+                <BookOpen size={40} className="text-yellow-300 md:hidden" />
+                <BookOpen size={48} className="text-yellow-300 hidden md:block" />
+              </div>
             </div>
-          </motion.div>
+<h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 md:mb-4 text-white leading-tight">
+              Educational
+              <span className="block text-yellow-300">Excellence</span>
+            </h1>
+            <p className="text-base sm:text-lg md:text-xl text-indigo-100 max-w-3xl mx-auto mb-6 md:mb-8 leading-relaxed px-4 sm:px-0">
+              Unlock your potential with our innovative educational programs designed to shape tomorrow's leaders. 
+              Experience personalized learning, expert guidance, and career-focused training.
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* Services Overview */}
-      <section className="py-20">
+      {/* Programs Overview */}
+      <section ref={programsRef} className="py-16 md:py-20 lg:py-24 bg-gradient-to-br from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Education Services</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Comprehensive support for every aspect of your international education journey
+          <div className="programs-header text-center mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 md:mb-4 px-4 sm:px-0">Our Learning Programs</h2>
+            <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed px-4 sm:px-0">
+              Choose from our carefully crafted programs designed to meet your educational goals and career aspirations
             </p>
-          </motion.div>
+          </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {services.map((service, index) => {
-              const Icon = service.icon;
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+            {programs.map((program, index) => {
+              const Icon = program.icon;
+              const gradients = [
+                'from-blue-500 to-cyan-500',
+                'from-purple-500 to-pink-500',
+                'from-green-500 to-emerald-500',
+                'from-orange-500 to-red-500'
+              ];
+              const gradient = gradients[index % gradients.length];
               return (
-                <motion.div
-                  key={service.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow"
+                <div
+                  key={program.title}
+                  className="program-card bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden group"
                 >
-                  <div className="flex items-start space-x-4">
-                    <div className="bg-blue-100 p-3 rounded-lg">
-                      <Icon size={32} className="text-blue-600" />
+                  <div className={`bg-gradient-to-r ${gradient} p-4 sm:p-6 text-white`}>
+                    <div className="flex items-center space-x-3 sm:space-x-4 mb-3 sm:mb-4">
+                      <div className="bg-white/20 p-2 sm:p-3 rounded-2xl backdrop-blur-sm group-hover:scale-110 transition-transform duration-300">
+                        <Icon size={28} className="text-white sm:hidden" />
+                        <Icon size={36} className="text-white hidden sm:block" />
+                      </div>
+                      <h3 className="text-lg sm:text-xl font-bold text-white">{program.title}</h3>
                     </div>
-                    <div className="flex-1">
-                      <h3 className="text-2xl font-semibold text-gray-900 mb-2">{service.title}</h3>
-                      <p className="text-gray-600 mb-4">{service.description}</p>
-                      <ul className="space-y-2">
-                        {service.features.map((feature, featureIndex) => (
-                          <li key={featureIndex} className="flex items-center space-x-2 text-gray-700">
-                            <CheckCircle size={16} className="text-green-500 flex-shrink-0" />
-                            <span className="text-sm">{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                    <p className="text-white/90 text-sm sm:text-base leading-relaxed">{program.description}</p>
                   </div>
-                </motion.div>
+                  <div className="p-4 sm:p-6">
+                    <ul className="space-y-2 sm:space-y-3">
+                      {program.features.map((feature, featureIndex) => (
+                        <li key={featureIndex} className="flex items-start space-x-2 sm:space-x-3">
+                          <div className="flex-shrink-0 mt-1">
+                            <CheckCircle size={16} className="text-green-500 sm:hidden" />
+                            <CheckCircle size={18} className="text-green-500 hidden sm:block" />
+                          </div>
+                          <span className="text-gray-700 leading-relaxed text-sm sm:text-base">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
               );
             })}
           </div>
         </div>
       </section>
 
-      {/* Popular Destinations */}
-      <section className="py-20 bg-gray-50">
+      {/* Benefits Section */}
+      <section ref={benefitsRef} className="py-16 md:py-20 lg:py-24 bg-gradient-to-r from-indigo-600 to-purple-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Popular Study Destinations</h2>
-            <p className="text-xl text-gray-600">Explore top countries and universities for international education</p>
-          </motion.div>
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 md:mb-4 px-4 sm:px-0">Why Choose Our Programs</h2>
+            <p className="text-base sm:text-lg text-indigo-100 max-w-2xl mx-auto leading-relaxed px-4 sm:px-0">
+              Experience the difference with our proven approach to education and professional development
+            </p>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {destinations.map((destination, index) => (
-              <motion.div
-                key={destination.country}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow"
-              >
-                <div className="flex items-center space-x-2 mb-4">
-                  <Globe size={24} className="text-blue-600" />
-                  <h3 className="text-xl font-semibold text-gray-900">{destination.country}</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+            {benefits.map((benefit, index) => {
+              const Icon = benefit.icon;
+              return (
+                <div key={index} className="benefit-card text-center">
+                  <div className="bg-white/20 w-16 h-16 sm:w-20 sm:h-20 rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-6 backdrop-blur-sm">
+                    <Icon size={28} className="text-yellow-300 sm:hidden" />
+                    <Icon size={36} className="text-yellow-300 hidden sm:block" />
+                  </div>
+                  <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">{benefit.title}</h3>
+                  <p className="text-indigo-100 leading-relaxed text-sm sm:text-base">{benefit.description}</p>
                 </div>
-                <div className="space-y-3 mb-4">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Universities:</span>
-                    <span className="font-semibold">{destination.universities}</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Scholarships:</span>
-                    <span className="font-semibold">{destination.scholarships}</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Avg. Cost:</span>
-                    <span className="font-semibold">{destination.avgCost}</span>
-                  </div>
-                </div>
-                <div className="border-t pt-4">
-                  <p className="text-sm text-gray-600 mb-2">Popular Universities:</p>
-                  <div className="flex flex-wrap gap-1">
-                    {destination.popular.map((uni) => (
-                      <span key={uni} className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">
-                        {uni}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-blue-600 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-4xl font-bold mb-4">Ready to Start Your Educational Journey?</h2>
-            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-              Get personalized guidance from our education experts and take the first step towards your dream university.
+      <section ref={ctaRef} className="py-16 md:py-20 lg:py-24 bg-gradient-to-br from-gray-900 to-black text-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="cta-content">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 leading-tight px-4 sm:px-0">
+              Start Your Learning Journey Today
+            </h2>
+            <p className="text-base sm:text-lg text-gray-300 mb-6 md:mb-8 max-w-2xl mx-auto leading-relaxed px-4 sm:px-0">
+              Join thousands of successful learners who have transformed their careers through our innovative educational programs. 
+              Your future begins with the next step.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold flex items-center space-x-2 mx-auto sm:mx-0 hover:bg-gray-50 transition-all duration-200"
-                >
-                  <Calendar className="w-5 h-5" />
-                  <span>Book Free Consultation</span>
-                </motion.button>
-              </Link>
-              <Link href="/about">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-yellow-400 text-blue-900 px-8 py-4 rounded-xl font-semibold flex items-center space-x-2 mx-auto sm:mx-0 hover:bg-yellow-300 transition-all duration-200"
-                >
-                  <span>Learn More</span>
-                  <ArrowRight className="w-5 h-5" />
-                </motion.button>
-              </Link>
+            <div className="flex justify-center">
+              <Button
+                href="/contact"
+                variant="primary"
+                size="lg"
+                icon={Calendar}
+                className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black hover:from-yellow-500 hover:to-orange-600 font-semibold px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base"
+              >
+                Book Free Consultation
+              </Button>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
     </div>

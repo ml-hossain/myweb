@@ -1,8 +1,37 @@
+/* Additional global styles for responsive spacing */
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.navbar-spacing {
+    padding-top: 56px; /* Adjust when the navbar height changes */
+}
+
+/* Responsive spacing adjustments */
+@media (max-width: 768px) {
+    .navbar-spacing {
+        padding-top: 56px; /* Maintain space for fixed navbar */
+    }
+}
+
+@media (min-width: 768px) {
+    .navbar-spacing {
+        padding-top: 64px; /* Adjust as needed for larger viewports */
+    }
+}
+
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #1e3a8a;
+  --foreground: #ffffff;
 }
 
 @theme inline {
@@ -14,8 +43,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #1e3a8a;
+    --foreground: #ffffff;
   }
 }
 
@@ -24,3 +53,31 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Ensure proper text visibility */
+.text-white { color: white !important; }
+.text-black { color: black !important; }
+.text-gray-900 { color: #111827 !important; }
+.text-gray-800 { color: #1f2937 !important; }
+.text-gray-700 { color: #374151 !important; }
+.text-gray-600 { color: #4b5563 !important; }
+.text-gray-500 { color: #6b7280 !important; }
+.text-gray-400 { color: #9ca3af !important; }
+.text-gray-300 { color: #d1d5db !important; }
+.text-gray-200 { color: #e5e7eb !important; }
+.text-gray-100 { color: #f3f4f6 !important; }
+
+.story-button-hover:hover {
+  color: black !important;
+}
+
+/* Fix select dropdown visibility */
+select {
+  color: #374151 !important;
+}
+
+select option {
+  color: #374151 !important;
+  background-color: white !important;
+}
+

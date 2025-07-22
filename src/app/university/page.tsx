@@ -1,9 +1,26 @@
 "use client";
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Link from 'next/link';
+import Button from '@/components/Button';
+
+// Register ScrollTrigger plugin
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 import { ChevronDown, MapPin, Star, Newspaper, ArrowLeft, ArrowRight } from 'lucide-react';
 
-const universities = [
+  // Utility function to create URL-friendly slugs
+  const createSlug = (name: string) => {
+    return name
+      .toLowerCase()
+      .replace(/[^a-z0-9 -]/g, '') // Remove special characters
+      .replace(/\s+/g, '-') // Replace spaces with hyphens
+      .replace(/-+/g, '-'); // Replace multiple hyphens with single hyphen
+  };
+
+  const universities = [
     { id: 1, name: 'Harvard University', country: 'USA', type: 'Private', image: 'https://images.unsplash.com/photo-1589995228333-f2b47a8e93de?q=80&w=2070&auto=format&fit=crop', description: 'An Ivy League university in Cambridge, Massachusetts, known for its academic excellence and influential alumni.' },
     { id: 2, name: 'University of Cambridge', country: 'UK', type: 'Public', image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop', description: 'A historic institution in the UK, celebrated for its contributions to science and the arts.' },
     { id: 3, name: 'ETH Zurich', country: 'Switzerland', type: 'Public', image: 'https://images.unsplash.com/photo-1541848003348-015ea4388924?q=80&w=2070&auto=format&fit=crop', description: 'A leading university for science and technology, located in the heart of Europe.' },
@@ -53,16 +70,12 @@ const UniversityPage = () => {
     <div className="bg-gray-50 min-h-screen">
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Find Your University</h1>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Explore top universities from around the world. Use the filters to narrow down your search and find the perfect fit for your academic journey.
-              </p>
-            </motion.div>
+          <div>
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Find Your University</h1>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Explore top universities from around the world. Use the filters to narrow down your search and find the perfect fit for your academic journey.
+            </p>
+          </div>
         </div>
       </header>
 
@@ -102,11 +115,8 @@ const UniversityPage = () => {
 
             <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-8">
               {paginatedUniversities.map((uni, index) => (
-                <motion.div
+                <div
                   key={uni.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.05 }}
                   className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 flex flex-col"
                 >
                   <div className="relative">
@@ -120,11 +130,11 @@ const UniversityPage = () => {
                     </div>
                     <h3 className="text-xl font-bold text-gray-800 mb-2 h-14 overflow-hidden">{uni.name}</h3>
                     <p className="text-gray-600 text-sm mb-4 flex-grow h-20 overflow-hidden">{uni.description}</p>
-                    <a href="#" className="mt-auto self-start inline-block bg-blue-600 text-white font-semibold px-6 py-2 rounded-lg hover:bg-blue-700 transition-all duration-300">
+                    <Link href={`/university/${createSlug(uni.name)}`} className="mt-auto self-start inline-block bg-blue-600 text-white font-semibold px-6 py-2 rounded-lg hover:bg-blue-700 transition-all duration-300">
                       Learn More
-                    </a>
+                    </Link>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
 
@@ -210,3 +220,6 @@ const UniversityPage = () => {
 };
 
 export default UniversityPage;
+
+// Export universities data for use in dynamic routes
+export { universities };

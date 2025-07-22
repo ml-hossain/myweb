@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import { gsap } from 'gsap';
 
 interface TeamMember {
   name: string;
@@ -30,33 +30,24 @@ const TeamCarousel: React.FC<TeamCarouselProps> = ({ team }) => {
         {/* Container for all slides */}
         <div className="relative w-full h-full flex">
           {team.map((member, index) => (
-            <motion.div
+            <div
               key={member.name}
-              initial={false}
-              animate={{
-                x: `${(index - current) * 100}%`,
-              }}
-              transition={{
-                duration: 1.5,
-                ease: [0.25, 0.1, 0.25, 1.0],
-              }}
               className="absolute inset-0 w-full h-full bg-white flex items-center justify-center"
+              style={{
+                transform: `translateX(${(index - current) * 100}%)`,
+                transition: 'transform 1.5s cubic-bezier(0.25, 0.1, 0.25, 1.0)'
+              }}
             >
               <div className="w-full h-full flex items-start justify-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 lg:pt-16">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full">
                   {/* Image Section */}
-                  <motion.div
-                    initial={{ x: 100, opacity: 0 }}
-                    animate={{ 
-                      x: index === current ? 0 : 100,
-                      opacity: index === current ? 1 : 0
-                    }}
-                    transition={{
-                      duration: 1.2,
-                      delay: index === current ? 0.3 : 0,
-                      ease: [0.25, 0.1, 0.25, 1.0]
-                    }}
+                  <div
                     className="relative flex justify-center lg:justify-end"
+                    style={{
+                      transform: `translateX(${index === current ? 0 : 100}px)`,
+                      opacity: index === current ? 1 : 0,
+                      transition: 'transform 1.2s ease-out, opacity 1.2s ease-out'
+                    }}
                   >
                     <div className="w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 xl:w-[420px] xl:h-[420px]">
                       <img
@@ -65,73 +56,64 @@ const TeamCarousel: React.FC<TeamCarouselProps> = ({ team }) => {
                         className="w-full h-full object-cover rounded-full shadow-2xl"
                       />
                     </div>
-                  </motion.div>
+                  </div>
                   
                   {/* Content Section */}
-                  <motion.div
-                    initial={{ x: -100, opacity: 0 }}
-                    animate={{ 
-                      x: index === current ? 0 : -100,
-                      opacity: index === current ? 1 : 0
-                    }}
-                    transition={{
-                      duration: 1.2,
-                      delay: index === current ? 0.5 : 0,
-                      ease: [0.25, 0.1, 0.25, 1.0]
-                    }}
+                  <div
                     className="text-center lg:text-left px-4 lg:px-0"
+                    style={{
+                      transform: `translateX(${index === current ? 0 : -100}px)`,
+                      opacity: index === current ? 1 : 0,
+                      transition: 'transform 1.2s ease-out, opacity 1.2s ease-out'
+                    }}
                   >
-                    <motion.h2 
+                    <h2 
                       className="text-xl sm:text-2xl md:text-3xl font-semibold mb-3 sm:mb-4 text-blue-600"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ 
+                      style={{
                         opacity: index === current ? 1 : 0,
-                        y: index === current ? 0 : 20
+                        transform: `translateY(${index === current ? 0 : 20}px)`,
+                        transition: 'opacity 1.5s ease-out, transform 1.5s ease-out'
                       }}
-                      transition={{ duration: 1.5, delay: index === current ? 0.8 : 0 }}
                     >
                       Meet Our Expert
-                    </motion.h2>
-                    <motion.h3 
+                    </h2>
+                    <h3 
                       className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 leading-tight text-gray-900"
-                      initial={{ opacity: 0, y: 40 }}
-                      animate={{ 
+                      style={{
                         opacity: index === current ? 1 : 0,
-                        y: index === current ? 0 : 40
+                        transform: `translateY(${index === current ? 0 : 40}px)`,
+                        transition: 'opacity 1.8s ease-out, transform 1.8s ease-out'
                       }}
-                      transition={{ duration: 1.8, delay: index === current ? 1.0 : 0 }}
                     >
                       {member.name}
-                    </motion.h3>
-                    <motion.p 
+                    </h3>
+                    <p 
                       className="text-lg sm:text-xl md:text-2xl font-light mb-6 sm:mb-8 text-blue-700"
-                      initial={{ opacity: 0, y: 30 }}
-                      animate={{ 
+                      style={{
                         opacity: index === current ? 1 : 0,
-                        y: index === current ? 0 : 30
+                        transform: `translateY(${index === current ? 0 : 30}px)`,
+                        transition: 'opacity 1.6s ease-out, transform 1.6s ease-out'
                       }}
-                      transition={{ duration: 1.6, delay: index === current ? 1.2 : 0 }}
                     >
                       {member.role}
-                    </motion.p>
-                    <motion.p 
+                    </p>
+                    <p 
                       className="text-sm sm:text-base md:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0 text-gray-700 pr-0 lg:pr-8"
-                      initial={{ opacity: 0, y: 25 }}
-                      animate={{ 
+                      style={{
                         opacity: index === current ? 1 : 0,
-                        y: index === current ? 0 : 25
+                        transform: `translateY(${index === current ? 0 : 25}px)`,
+                        transition: 'opacity 1.4s ease-out, transform 1.4s ease-out'
                       }}
-                      transition={{ duration: 1.4, delay: index === current ? 1.4 : 0 }}
                     >
                       {member.about.length > 300 
                         ? `${member.about.substring(0, 300)}...` 
                         : member.about
                       }
-                    </motion.p>
-                  </motion.div>
+                    </p>
+                  </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
         

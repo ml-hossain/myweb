@@ -1,9 +1,9 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-import TeamCarousel from '@/components/TeamCarousel';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
   GraduationCap, 
   Plane, 
@@ -18,8 +18,221 @@ import {
   MapPin,
   Clock
 } from 'lucide-react';
+import TestimonialsSlider from '@/components/TestimonialsSlider';
+import Button from '@/components/Button';
+
+// Register ScrollTrigger plugin
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const HomePage: React.FC = () => {
+  const heroRef = useRef<HTMLDivElement>(null);
+  const statsRef = useRef<HTMLDivElement>(null);
+  const servicesRef = useRef<HTMLDivElement>(null);
+  const expertRef = useRef<HTMLDivElement>(null);
+  const testimonialsRef = useRef<HTMLDivElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Hero section animations
+      gsap.fromTo(
+        ".hero-content",
+        { opacity: 0, x: -50 },
+        { opacity: 1, x: 0, duration: 0.8, ease: "power2.out" }
+      );
+      
+      gsap.fromTo(
+        ".hero-sidebar",
+        { opacity: 0, x: 50 },
+        { opacity: 1, x: 0, duration: 0.8, delay: 0.2, ease: "power2.out" }
+      );
+
+      // Stats section animations
+      gsap.fromTo(
+        ".stat-item",
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: statsRef.current,
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+
+      // Services section animations
+      gsap.fromTo(
+        ".services-header",
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          scrollTrigger: {
+            trigger: servicesRef.current,
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+
+      gsap.fromTo(
+        ".service-card",
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.2,
+          scrollTrigger: {
+            trigger: ".service-card",
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+
+      // Expert section animations
+      gsap.fromTo(
+        ".expert-header",
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          scrollTrigger: {
+            trigger: expertRef.current,
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+
+      gsap.fromTo(
+        ".expert-image",
+        { opacity: 0, x: -50 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.8,
+          delay: 0.2,
+          scrollTrigger: {
+            trigger: expertRef.current,
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+
+      gsap.fromTo(
+        ".expert-content",
+        { opacity: 0, x: 50 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.8,
+          delay: 0.4,
+          scrollTrigger: {
+            trigger: expertRef.current,
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+
+      gsap.fromTo(
+        ".expert-text",
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.2,
+          delay: 0.6,
+          scrollTrigger: {
+            trigger: expertRef.current,
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+
+      // Testimonials section animations
+      gsap.fromTo(
+        ".testimonials-header",
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          scrollTrigger: {
+            trigger: testimonialsRef.current,
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+
+      // CTA section animations
+      gsap.fromTo(
+        ".cta-content",
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          scrollTrigger: {
+            trigger: ctaRef.current,
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+
+      // Button hover animations
+      const buttons = document.querySelectorAll('.gsap-button');
+      buttons.forEach(button => {
+        button.addEventListener('mouseenter', () => {
+          gsap.to(button, { scale: 1.05, duration: 0.2 });
+        });
+        button.addEventListener('mouseleave', () => {
+          gsap.to(button, { scale: 1, duration: 0.2 });
+        });
+      });
+
+      // Service card hover animations
+      const serviceCards = document.querySelectorAll('.service-card');
+      serviceCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          gsap.to(card, { y: -10, duration: 0.3 });
+        });
+        card.addEventListener('mouseleave', () => {
+          gsap.to(card, { y: 0, duration: 0.3 });
+        });
+      });
+
+      // Expert image hover animation
+      const expertImage = document.querySelector('.expert-image');
+      if (expertImage) {
+        expertImage.addEventListener('mouseenter', () => {
+          gsap.to(expertImage, { scale: 1.05, duration: 0.3 });
+        });
+        expertImage.addEventListener('mouseleave', () => {
+          gsap.to(expertImage, { scale: 1, duration: 0.3 });
+        });
+      }
+    });
+
+    return () => ctx.revert();
+  }, []);
+
   const stats = [
     { icon: Users, number: '10,000+', label: 'Students Helped' },
     { icon: Globe, number: '50+', label: 'Countries' },
@@ -43,14 +256,6 @@ const HomePage: React.FC = () => {
       features: ['Flight Booking', 'Hotel Reservations', 'Travel Insurance', 'Itinerary Planning'],
       link: '/travel',
       color: 'bg-green-500'
-    },
-    {
-      icon: FileText,
-      title: 'Visa Services',
-      description: 'Expert assistance with visa applications and documentation for smooth approval.',
-      features: ['Visa Application', 'Document Review', 'Interview Preparation', 'Status Tracking'],
-      link: '/visa',
-      color: 'bg-purple-500'
     },
   ];
 
@@ -82,98 +287,109 @@ const HomePage: React.FC = () => {
       rating: 5,
       text: 'From application to arrival, NextGen EduMirate Solutions supported me every step of the way. Their travel planning service made my transition to Canada so smooth.'
     },
-  ];
-
-  const team = [
     {
-      name: 'Dr. Muhammad Rahman',
-      role: 'CEO & Founder',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
-      about: 'Dr. Muhammad Rahman is the visionary founder of NextGen EduMirate Solutions with over 18 years of experience in international education consulting. He holds a PhD in Educational Leadership from Harvard University and has personally guided over 5,000 students to achieve their dreams of studying abroad. His expertise spans across university admissions, scholarship strategies, and global education trends. Under his leadership, NextGen EduMirate Solutions has maintained a 98% success rate in student placements and has established partnerships with over 500 universities worldwide. Dr. Rahman is a sought-after speaker at international education conferences and has authored multiple research papers on cross-cultural education adaptation.'
+      name: 'David Chen',
+      country: 'China',
+      university: 'Stanford University',
+      program: 'Master\'s in Computer Science',
+      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80&q=80',
+      rating: 5,
+      text: 'The personalized approach and attention to detail was exceptional. They helped me navigate the complex application process and I got accepted to my dream university.'
     },
     {
-      name: 'Sarah Johnson',
-      role: 'Head of Education Services',
-      image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
-      about: 'Sarah Johnson brings 12+ years of specialized expertise in university admissions and academic planning. She graduated summa cum laude from Oxford University with a Master\'s in International Education Policy. Sarah has personally reviewed over 10,000 university applications and has an intimate understanding of admission requirements across top institutions in the US, UK, Canada, and Australia. Her strategic approach to profile building and application crafting has helped students secure admissions to Ivy League schools, Russell Group universities, and other prestigious institutions. She also leads our scholarship division, having secured over $50 million in scholarships for students over her career.'
+      name: 'Emma Wilson',
+      country: 'Australia',
+      university: 'Harvard University',
+      program: 'MBA',
+      image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80&q=80',
+      rating: 5,
+      text: 'Outstanding service! The team was always available to answer my questions and provided invaluable guidance throughout my MBA application journey.'
     },
     {
-      name: 'Ahmed Al-Rashid',
-      role: 'Senior Visa Consultant',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
-      about: 'Ahmed Al-Rashid is our visa specialist with an outstanding 99.2% visa approval rate across all major study destinations. With 15 years of experience in immigration law and student visa processing, he holds certifications from multiple immigration authorities and maintains up-to-date knowledge of ever-changing visa regulations. Ahmed has successfully processed over 8,000 student visa applications and specializes in complex cases including visa appeals and re-applications. His multilingual abilities (Arabic, English, French, and German) enable him to serve students from diverse backgrounds. He regularly conducts visa preparation workshops and has authored the comprehensive "Student Visa Success Guide" used by counselors worldwide.'
+      name: 'Raj Patel',
+      country: 'India',
+      university: 'Cambridge University',
+      program: 'PhD in Engineering',
+      image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80&q=80',
+      rating: 5,
+      text: 'Their expertise in research programs and funding opportunities was remarkable. I secured both admission and a research scholarship thanks to their guidance.'
     },
     {
-      name: 'Lisa Chen',
-      role: 'Director of Student Services',
-      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
-      about: 'Lisa Chen oversees our comprehensive student support services, ensuring every student receives personalized attention throughout their journey. With a Master\'s degree in Psychology from Stanford University and 10 years in student counseling, she understands the emotional and practical challenges students face when moving abroad. Lisa has developed our proprietary pre-departure orientation program and ongoing support system that includes academic mentoring, cultural adaptation assistance, and career guidance. She leads a team of 25 counselors and has personally mentored over 3,000 students. Her innovative approach to student welfare has been recognized by the International Association of Student Affairs Professionals.'
+      name: 'Sofia Martinez',
+      country: 'Mexico',
+      university: 'London School of Economics',
+      program: 'Master\'s in Economics',
+      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80&q=80',
+      rating: 5,
+      text: 'The visa process was handled so professionally. I was nervous about the requirements, but their step-by-step guidance made everything clear and manageable.'
     },
     {
-      name: 'David Thompson',
-      role: 'Travel & Logistics Manager',
-      image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
-      about: 'David Thompson manages all travel and logistics operations with meticulous attention to detail and cost optimization. He brings 14 years of experience from the travel industry, including 8 years with international airlines and 6 years in educational travel. David has coordinated travel arrangements for over 12,000 students and has established partnerships with major airlines to secure exclusive student discounts. His expertise includes complex itinerary planning, travel insurance coordination, and emergency travel assistance. He holds certifications in International Air Transport Association (IATA) and is our go-to expert for last-minute travel changes and emergency situations. David\'s proactive approach has saved students thousands of dollars in travel costs while ensuring seamless journey experiences.'
+      name: 'James Thompson',
+      country: 'Canada',
+      university: 'University of Melbourne',
+      program: 'Master\'s in Medicine',
+      image: 'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80&q=80',
+      rating: 5,
+      text: 'Exceptional support for medical program applications. They understood the unique requirements and helped me craft a compelling application that stood out.'
     },
     {
-      name: 'Dr. Priya Sharma',
-      role: 'Academic Advisor & Research Specialist',
-      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
-      about: 'Dr. Priya Sharma is our academic advisor specializing in STEM programs and research opportunities. She holds a PhD in Computer Science from MIT and has worked as a professor at leading universities before joining NextGen EduMirate Solutions. Dr. Sharma has extensive knowledge of research programs, graduate assistantships, and academic funding opportunities across top-tier institutions. She has helped over 2,500 students identify the perfect academic programs aligned with their career goals and has a particular expertise in emerging fields like AI, data science, and biotechnology. Her network of academic contacts spans across 40+ countries, enabling her to provide insider insights into program selection and research opportunities that significantly enhance students\' academic and career prospects.'
+      name: 'Yuki Tanaka',
+      country: 'Japan',
+      university: 'ETH Zurich',
+      program: 'Master\'s in Data Science',
+      image: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80&q=80',
+      rating: 5,
+      text: 'The cultural preparation and pre-departure support was incredible. They helped me adapt to European academic culture and made my transition seamless.'
     }
   ];
+
+  const expert = {
+    name: 'Dr. Muhammad Rahman',
+    role: 'CEO & Founder',
+    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
+    about: 'Dr. Muhammad Rahman is the visionary founder of NextGen EduMirate Solutions with over 18 years of experience in international education consulting. He holds a PhD in Educational Leadership from Harvard University and has personally guided over 5,000 students to achieve their dreams of studying abroad. His expertise spans across university admissions, scholarship strategies, and global education trends. Under his leadership, NextGen EduMirate Solutions has maintained a 98% success rate in student placements and has established partnerships with over 500 universities worldwide. Dr. Rahman is a sought-after speaker at international education conferences and has authored multiple research papers on cross-cultural education adaptation.'
+  };
 
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 text-white py-20 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800 text-white py-20 overflow-hidden">
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              className="space-y-8"
-            >
+            <div className="hero-content space-y-8">
               <h1 className="text-4xl md:text-6xl font-bold leading-tight">
                 Your Gateway to
                 <span className="block text-yellow-400">Global Education</span>
               </h1>
-              <p className="text-xl text-blue-100 leading-relaxed">
+            <p className="text-xl text-primary-100 leading-relaxed">
                 Transform your dreams into reality with our comprehensive education, travel, and visa services. 
                 We guide you every step of the way to your international education journey.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/education">
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="bg-yellow-400 text-blue-900 px-6 py-3 md:px-8 md:py-4 rounded-lg font-semibold text-base md:text-lg flex items-center justify-center space-x-2 hover:bg-yellow-300 transition-colors whitespace-nowrap"
-                  >
-                    <BookOpen size={20} />
-                    <span>Explore Education</span>
-                  </motion.button>
-                </Link>
-                <Link href="/contact">
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="border-2 border-white text-white px-6 py-3 md:px-8 md:py-4 rounded-lg font-semibold text-base md:text-lg flex items-center justify-center space-x-2 hover:bg-white hover:text-blue-800 transition-colors whitespace-nowrap"
-                  >
-                    <span>Get Consultation</span>
-                    <ArrowRight size={20} />
-                  </motion.button>
-                </Link>
+                <Button
+                  href="/education"
+                  variant="primary"
+                  size="lg"
+                  icon={BookOpen}
+                  className="bg-yellow-400 text-primary-900 hover:bg-black hover:text-white"
+                >
+                  Explore Education
+                </Button>
+                <Button
+                  href="/contact"
+                  variant="outline"
+                  size="lg"
+                  icon={ArrowRight}
+                  iconPosition="right"
+                  className="border-2 border-white text-white hover:bg-black hover:text-white hover:border-black"
+                >
+                  Get Consultation
+                </Button>
               </div>
-            </motion.div>
+            </div>
             
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative"
-            >
+            <div className="hero-sidebar relative">
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 space-y-6">
                 <h3 className="text-2xl font-semibold">Quick Start</h3>
                 <div className="space-y-4">
@@ -195,31 +411,28 @@ const HomePage: React.FC = () => {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-gray-50">
+      <section ref={statsRef} className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => {
               const Icon = stat.icon;
               return (
-                <motion.div
+                <div
                   key={stat.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="text-center"
+                  className="stat-item text-center"
                 >
-                  <div className="bg-blue-600 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <div className="bg-primary-600 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Icon size={24} />
                   </div>
-                  <div className="text-3xl font-bold text-gray-900 mb-2">{stat.number}</div>
-                  <div className="text-gray-600">{stat.label}</div>
-                </motion.div>
+                  <div className="text-3xl font-bold text-black mb-2">{stat.number}</div>
+                  <div className="text-black">{stat.label}</div>
+                </div>
               );
             })}
           </div>
@@ -227,36 +440,27 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* Services Section */}
-      <section className="py-20">
+      <section ref={servicesRef} className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
+          <div className="services-header text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Services</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Comprehensive solutions for your international education journey
             </p>
-          </motion.div>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {services.map((service, index) => {
               const Icon = service.icon;
               return (
-                <motion.div
+                <div
                   key={service.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.2 }}
-                  whileHover={{ y: -10 }}
-                  className="bg-white rounded-xl shadow-lg overflow-hidden h-full flex flex-col"
+                  className="service-card bg-white rounded-xl shadow-lg overflow-hidden h-full flex flex-col"
                 >
                   <div className={`${service.color} p-6 text-white`}>
                     <Icon size={48} className="mb-4" />
                     <h3 className="text-2xl font-semibold mb-2">{service.title}</h3>
-                    <p className="text-blue-100">{service.description}</p>
+                    <p className="text-white">{service.description}</p>
                   </div>
                   <div className="p-6 flex-1 flex flex-col">
                     <ul className="space-y-3 mb-6 flex-1">
@@ -267,112 +471,120 @@ const HomePage: React.FC = () => {
                         </li>
                       ))}
                     </ul>
-                    <Link href={service.link} className="mt-auto">
-                      <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        className="w-full bg-gray-900 text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors whitespace-nowrap"
-                      >
-                        Learn More
-                      </motion.button>
-                    </Link>
+                    <Button
+                      href={service.link}
+                      variant="primary"
+                      size="md"
+                      fullWidth
+                      className="mt-auto"
+                    >
+                      Learn More
+                    </Button>
                   </div>
-                </motion.div>
+                </div>
               );
             })}
           </div>
         </div>
       </section>
 
-      {/* Team Section */}
-      <TeamCarousel team={team} />
-
-      {/* Testimonials Section */}
-      <section className="py-20 bg-gray-50">
+      {/* Meet Our Expert Section */}
+      <section ref={expertRef} className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">What Our Students Say</h2>
-            <p className="text-xl text-gray-600">Real experiences from students who achieved their dreams</p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={testimonial.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
+          <div className="expert-header text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4" style={{ color: '#1e3a8a' }}>Meet Our Expert</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Get to know the visionary leader behind NextGen EduMirate Solutions
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Image Section */}
+            <div className="expert-image flex justify-center lg:justify-end">
+              <div className="w-80 h-80 md:w-96 md:h-96 lg:w-[420px] lg:h-[420px]">
+                <img
+                  src={expert.image}
+                  alt={expert.name}
+                  className="w-full h-full object-cover rounded-full shadow-2xl"
+                />
+              </div>
+            </div>
+            
+            {/* Content Section */}
+            <div className="expert-content text-center lg:text-left">
+              <h3
+                className="expert-text text-2xl font-semibold mb-4"
+                style={{ color: '#1e3a8a' }}
               >
-                <div className="flex items-center mb-4">
-                  <img
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    className="w-12 h-12 rounded-full object-cover mr-4"
-                  />
-                  <div>
-                    <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
-                    <p className="text-sm text-blue-600">{testimonial.university}</p>
-                    <p className="text-gray-600 text-sm flex items-center">
-                      <MapPin size={12} className="mr-1" />
-                      {testimonial.country}
-                    </p>
-                  </div>
-                </div>
-                <div className="mb-4">
-                  <div className="flex mb-2">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} size={16} className="text-yellow-400 fill-current" />
-                    ))}
-                  </div>
-                  <p className="text-xs text-gray-500">{testimonial.program}</p>
-                </div>
-                <p className="text-gray-700 italic text-sm leading-relaxed">&quot;{testimonial.text}&quot;</p>
-              </motion.div>
-            ))}
+                Meet Our Expert
+              </h3>
+              <h4
+                className="expert-text text-4xl lg:text-5xl font-bold mb-4 leading-tight"
+                style={{ color: '#1e3a8a' }}
+              >
+                {expert.name}
+              </h4>
+              <p
+                className="expert-text text-xl font-light mb-6 text-gray-600"
+              >
+                {expert.role}
+              </p>
+              <div
+                className="expert-text text-lg leading-relaxed text-gray-700 max-w-2xl mx-auto lg:mx-0"
+              >
+                <p className="mb-4">
+                  {expert.about.substring(0, 300)}...
+                </p>
+                <p>
+                  {expert.about.substring(300, 600)}...
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
+      {/* Testimonials Section */}
+      <section ref={testimonialsRef} className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="testimonials-header text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">What Our Students Say</h2>
+            <p className="text-xl text-gray-600">Real experiences from students who achieved their dreams</p>
+          </div>
+
+          <TestimonialsSlider testimonials={testimonials} />
+        </div>
+      </section>
+
       {/* CTA Section */}
-      <section className="py-20 bg-blue-600 text-white">
+      <section ref={ctaRef} className="py-20 bg-primary-800 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
+          <div className="cta-content">
             <h2 className="text-4xl font-bold mb-4">Begin Your Adventure Today</h2>
-            <p className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
+            <p className="text-xl text-primary-100 mb-8 max-w-3xl mx-auto">
               Your global education and travel journey starts here. Connect with our expert consultants for personalized guidance and unlock a world of opportunities. Let's build your future together.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-yellow-400 text-blue-900 px-6 py-3 md:px-8 md:py-4 rounded-lg font-semibold text-base md:text-lg flex items-center justify-center space-x-2 hover:bg-yellow-300 transition-colors whitespace-nowrap"
-                >
-                  <Users size={20} />
-                  <span>Request a Callback</span>
-                </motion.button>
-              </Link>
-              <Link href="/university">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="border-2 border-white text-white px-6 py-3 md:px-8 md:py-4 rounded-lg font-semibold text-base md:text-lg hover:bg-white hover:text-blue-600 transition-colors flex items-center justify-center space-x-2 whitespace-nowrap"
-                >
-                  <Globe size={20} />
-                  <span>View Universities</span>
-                </motion.button>
-              </Link>
+              <Button
+                href="/contact"
+                variant="primary"
+                size="lg"
+                icon={Users}
+                className="bg-yellow-400 text-primary-900 hover:bg-black hover:text-white"
+              >
+                Request a Callback
+              </Button>
+              <Button
+                href="/university"
+                variant="outline"
+                size="lg"
+                icon={Globe}
+                className="border-2 border-white text-white hover:bg-black hover:text-white hover:border-black"
+              >
+                View Universities
+              </Button>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
     </div>

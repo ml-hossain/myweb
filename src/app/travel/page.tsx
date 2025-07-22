@@ -1,8 +1,9 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
   Plane,
   Hotel,
@@ -17,8 +18,95 @@ import {
   Camera,
   Briefcase
 } from 'lucide-react';
+import Button from '@/components/Button';
+
+// Register ScrollTrigger plugin
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const TravelPage: React.FC = () => {
+  const heroRef = useRef<HTMLDivElement>(null);
+  const servicesRef = useRef<HTMLDivElement>(null);
+  const destinationsRef = useRef<HTMLDivElement>(null);
+  const packagesRef = useRef<HTMLDivElement>(null);
+  const tipsRef = useRef<HTMLDivElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Hero section animations
+      gsap.fromTo(
+        ".hero-content",
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
+      );
+
+      // Services section animations
+      gsap.fromTo(
+        ".services-header",
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          scrollTrigger: {
+            trigger: servicesRef.current,
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+
+      gsap.fromTo(
+        ".service-card",
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: ".service-card",
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+
+      // Other sections animations
+      const sections = [
+        { trigger: destinationsRef.current, class: ".destinations-header" },
+        { trigger: destinationsRef.current, class: ".destination-card" },
+        { trigger: packagesRef.current, class: ".packages-header" },
+        { trigger: packagesRef.current, class: ".package-card" },
+        { trigger: tipsRef.current, class: ".tips-header" },
+        { trigger: tipsRef.current, class: ".tip-card" },
+        { trigger: ctaRef.current, class: ".cta-content" }
+      ];
+
+      sections.forEach(section => {
+        gsap.fromTo(
+          section.class,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            stagger: section.class.includes("card") ? 0.1 : 0,
+            scrollTrigger: {
+              trigger: section.trigger,
+              start: "top 80%",
+              toggleActions: "play none none reverse"
+            }
+          }
+        );
+      });
+    });
+
+    return () => ctx.revert();
+  }, []);
+
   const services = [
     {
       icon: Plane,
@@ -213,32 +301,6 @@ const TravelPage: React.FC = () => {
     }
   ];
 
-  const testimonials = [
-    {
-      name: 'Emma Thompson',
-      destination: 'University of Edinburgh',
-      trip: 'London Study Abroad',
-      rating: 5,
-      text: 'The travel package made my transition to studying in London seamless. Everything was organized perfectly!',
-      image: 'https://images.unsplash.com/photo-1494790108755-2616b332e234?w=60&h=60&fit=crop&crop=face'
-    },
-    {
-      name: 'Carlos Rodriguez',
-      destination: 'University of Toronto',
-      trip: 'Toronto Student Package',
-      rating: 5,
-      text: 'Great value for money! The accommodation they found was perfect and the airport transfer was so convenient.',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&fit=crop&crop=face'
-    },
-    {
-      name: 'Yuki Tanaka',
-      destination: 'Technical University Munich',
-      trip: 'Berlin Cultural Experience',
-      rating: 5,
-      text: 'Not only did they handle all travel arrangements, but the cultural orientation helped me adapt quickly to German life.',
-      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=60&h=60&fit=crop&crop=face'
-    }
-  ];
 
   const tips = [
     {
@@ -266,66 +328,47 @@ const TravelPage: React.FC = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-green-600 via-green-700 to-green-800 text-white py-20">
+      <section className="relative bg-black text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center"
-          >
+          <div className="hero-content text-center">
             <Plane size={80} className="mx-auto mb-6 text-yellow-400" />
             <h1 className="text-4xl md:text-6xl font-bold mb-6">Travel Services</h1>
-            <p className="text-xl text-green-100 max-w-3xl mx-auto mb-8">
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
               Seamless travel solutions designed specifically for international students. 
               From flights to accommodation, we handle every detail of your journey.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-yellow-400 text-green-900 px-8 py-4 rounded-lg font-semibold text-lg flex items-center justify-center space-x-2 hover:bg-yellow-300 transition-colors"
-                >
-                  <MapPin size={20} />
-                  <span>Plan My Trip</span>
-                </motion.button>
-              </Link>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-green-800 transition-colors"
+              <Button
+                href="/contact"
+                variant="primary"
+                size="lg"
+                icon={MapPin}
+                className="bg-yellow-400 text-black hover:bg-yellow-500"
               >
-                <span>View Packages</span>
-              </motion.button>
+                Plan My Trip
+              </Button>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Services Grid */}
-      <section className="py-20">
+      <section ref={servicesRef} className="py-20 bg-gradient-to-br from-green-600 via-green-700 to-green-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Travel Services</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <div className="services-header text-center mb-16">
+            <h2 className="text-4xl font-bold text-white mb-4">Our Travel Services</h2>
+            <p className="text-xl text-green-100 max-w-3xl mx-auto">
               Comprehensive travel solutions tailored for international students
             </p>
-          </motion.div>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => {
               const Icon = service.icon;
               return (
-                <motion.div
+                <div
                   key={service.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className={`relative bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow ${
+                  className={`service-card relative bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow ${
                     service.popular ? 'ring-2 ring-green-500' : ''
                   }`}
                 >
@@ -352,7 +395,7 @@ const TravelPage: React.FC = () => {
                       </li>
                     ))}
                   </ul>
-                </motion.div>
+                </div>
               );
             })}
           </div>
@@ -360,26 +403,18 @@ const TravelPage: React.FC = () => {
       </section>
 
       {/* Popular Destinations */}
-      <section className="py-20 bg-gray-50">
+      <section ref={destinationsRef} className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
+          <div className="destinations-header text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Popular Student Destinations</h2>
             <p className="text-xl text-gray-600">Top cities chosen by international students</p>
-          </motion.div>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {destinations.map((destination, index) => (
-              <motion.div
+              <div
                 key={destination.city}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
+                className="destination-card bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
               >
                 <div className="h-48 bg-gradient-to-br from-green-400 to-blue-500"></div>
                 <div className="p-6">
@@ -410,189 +445,62 @@ const TravelPage: React.FC = () => {
                     </ul>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Travel Packages */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Student Travel Packages</h2>
-            <p className="text-xl text-gray-600">Choose the perfect package for your study abroad journey</p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {packages.map((pkg, index) => (
-              <motion.div
-                key={pkg.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className={`relative bg-white rounded-xl shadow-lg overflow-hidden ${
-                  pkg.popular ? 'ring-2 ring-green-500 transform scale-105' : ''
-                }`}
-              >
-                {pkg.popular && (
-                  <div className="bg-green-500 text-white text-center py-2 font-semibold">
-                    Most Popular
-                  </div>
-                )}
-                <div className="p-8">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{pkg.name}</h3>
-                  <div className="mb-6">
-                    <span className="text-3xl font-bold text-green-600">{pkg.price}</span>
-                    <p className="text-gray-600">{pkg.duration}</p>
-                  </div>
-                  <ul className="space-y-3 mb-8">
-                    {pkg.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-start space-x-2">
-                        <CheckCircle size={16} className="text-green-500 mt-1 flex-shrink-0" />
-                        <span className="text-gray-700 text-sm">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    className={`w-full py-3 rounded-lg font-semibold transition-colors ${
-                      pkg.popular
-                        ? 'bg-green-600 text-white hover:bg-green-700'
-                        : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
-                    }`}
-                  >
-                    Choose Package
-                  </motion.button>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Travel Tips */}
-      <section className="py-20 bg-gray-50">
+      <section ref={tipsRef} className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
+          <div className="tips-header text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Student Travel Tips</h2>
             <p className="text-xl text-gray-600">Essential advice for international student travelers</p>
-          </motion.div>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {tips.map((tip, index) => {
               const Icon = tip.icon;
               return (
-                <motion.div
+                <div
                   key={tip.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="text-center"
+                  className="tip-card text-center"
                 >
                   <div className="bg-green-100 p-4 rounded-full inline-block mb-4">
                     <Icon size={32} className="text-green-600" />
                   </div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">{tip.title}</h3>
                   <p className="text-gray-600 text-sm">{tip.description}</p>
-                </motion.div>
+                </div>
               );
             })}
           </div>
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Student Experiences</h2>
-            <p className="text-xl text-gray-600">What our travelers say about their journeys</p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={testimonial.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                <div className="flex items-center space-x-4 mb-4">
-                  <img
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    className="w-14 h-14 rounded-full object-cover"
-                  />
-                  <div>
-                    <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
-                    <p className="text-sm text-blue-600">{testimonial.destination}</p>
-                    <p className="text-sm text-green-600">{testimonial.trip}</p>
-                  </div>
-                </div>
-                <div className="flex mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} size={16} className="text-yellow-400 fill-current" />
-                  ))}
-                </div>
-                <p className="text-gray-700 italic text-sm leading-relaxed">&quot;{testimonial.text}&quot;</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-white text-gray-900">
+      <section ref={ctaRef} className="py-20 bg-white text-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
+          <div className="cta-content">
             <h2 className="text-4xl font-bold mb-4">Ready to Plan Your Journey?</h2>
             <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
               Let our travel experts create the perfect itinerary for your study abroad adventure.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-green-600 text-white px-8 py-4 rounded-xl font-semibold flex items-center space-x-2 mx-auto sm:mx-0 hover:bg-green-700 transition-all duration-200"
-                >
-                  <MapPin className="w-5 h-5" />
-                  <span>Start Planning</span>
-                </motion.button>
-              </Link>
-              <Link href="/visa">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-yellow-400 text-blue-900 px-8 py-4 rounded-xl font-semibold flex items-center space-x-2 mx-auto sm:mx-0 hover:bg-yellow-300 transition-all duration-200"
-                >
-                  <span>Check Visa Requirements</span>
-                  <ArrowRight className="w-5 h-5" />
-                </motion.button>
-              </Link>
+              <Button
+                href="/contact"
+                variant="primary"
+                size="lg"
+                icon={MapPin}
+                className="bg-green-600 hover:bg-green-700"
+              >
+                Start Planning
+              </Button>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
     </div>
