@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { gsap } from 'gsap';
 import { Menu, X, GraduationCap, Plane, FileText, School } from 'lucide-react';
 
@@ -9,6 +10,8 @@ const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
+  const navRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   const navItems = [
     { name: 'Home', href: '/', icon: null },
@@ -18,6 +21,63 @@ const Navbar: React.FC = () => {
     { name: 'About', href: '/about', icon: null },
     { name: 'Contact', href: '/contact', icon: null },
   ];
+
+  // Debug function to test navigation
+  const handleNavClick = (href: string, name: string, event?: React.MouseEvent) => {
+    console.log(`Navigating to: ${href} (${name})`);
+    setIsOpen(false);
+    
+    // Fallback navigation using router.push if Link doesn't work
+    setTimeout(() => {
+      router.push(href);
+    }, 100);
+  };
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (isOpen && navRef.current && !navRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
+
+  // Close mobile menu on window resize (desktop view)
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768 && isOpen) {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isOpen]);
+
+  // Close mobile menu on escape key
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isOpen) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscape);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [isOpen]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -62,20 +122,34 @@ const Navbar: React.FC = () => {
     const mobileMenu = mobileMenuRef.current;
     if (mobileMenu) {
       if (isOpen) {
+        // Prevent body scroll when mobile menu is open
+        document.body.classList.add('mobile-menu-open');
         gsap.fromTo(mobileMenu, 
-          { opacity: 0, height: 0 },
-          { opacity: 1, height: 'auto', duration: 0.3 }
+          { opacity: 0, y: -10 },
+          { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }
         );
       } else {
-        gsap.to(mobileMenu, { opacity: 0, height: 0, duration: 0.3 });
+        // Restore body scroll when mobile menu is closed
+        document.body.classList.remove('mobile-menu-open');
+        gsap.to(mobileMenu, { 
+          opacity: 0, 
+          y: -10, 
+          duration: 0.3, 
+          ease: "power2.in" 
+        });
       }
     }
+
+    // Cleanup function to restore scroll when component unmounts
+    return () => {
+      document.body.classList.remove('mobile-menu-open');
+    };
   }, [isOpen]);
 
   return (
-    <nav className="bg-white shadow-lg fixed w-full top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
+    <nav ref={navRef} className="mobile-navbar-fixed mobile-navbar-wrapper">
+      <div className="max-w-7xl mx-auto mobile-navbar-content">
+        <div className="flex justify-between navbar-height items-center">
           <div className="flex items-center">
             <Link href="/" className="flex-shrink-0">
               <div
@@ -85,7 +159,7 @@ const Navbar: React.FC = () => {
                 <img 
                   src="/logo.png" 
                   alt="NextGen EduMirate Solutions" 
-                  className="h-12 w-auto"
+                  className="navbar-logo"
                 />
               </div>
             </Link>
@@ -96,13 +170,15 @@ const Navbar: React.FC = () => {
             {navItems.map((item) => {
               const Icon = item.icon;
               return (
-                <Link key={item.name} href={item.href} prefetch={false}>
-                  <div
-                    className="nav-item flex items-center space-x-1 text-gray-700 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
-                  >
-                    {Icon && <Icon size={16} />}
-                    <span>{item.name}</span>
-                  </div>
+                <Link 
+                  key={item.name} 
+                  href={item.href} 
+                  prefetch={false}
+                  onClick={() => handleNavClick(item.href, item.name)}
+                  className="nav-item flex items-center space-x-1 text-gray-700 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                >
+                  {Icon && <Icon size={16} />}
+                  <span>{item.name}</span>
                 </Link>
               );
             })}
@@ -112,7 +188,9 @@ const Navbar: React.FC = () => {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-700 hover:text-primary-600"
+              className="mobile-menu-button"
+              aria-label="Toggle mobile menu"
+              aria-expanded={isOpen}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -122,27 +200,34 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <div
-          ref={mobileMenuRef}
-          className="md:hidden bg-white border-t"
-        >
-          <div className="px-2 pt-2 pb-3 space-y-1">
-            {navItems.map((item) => {
-              const Icon = item.icon;
-              return (
-                <Link key={item.name} href={item.href}>
-                  <div
-                    onClick={() => setIsOpen(false)}
-                    className="mobile-nav-item flex items-center space-x-2 text-gray-700 hover:text-primary-600 block px-3 py-2 rounded-md text-base font-medium"
+        <>
+          <div 
+            className="mobile-menu-overlay active"
+            onClick={() => setIsOpen(false)}
+          />
+          <div
+            ref={mobileMenuRef}
+            className="mobile-menu-container"
+          >
+            <div className="mobile-menu-spacing">
+              {navItems.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <Link 
+                    key={item.name} 
+                    href={item.href}
+                    onClick={() => handleNavClick(item.href, item.name)}
+                    className="mobile-nav-item"
+                    role="menuitem"
                   >
-                    {Icon && <Icon size={16} />}
+                    {Icon && <Icon size={20} />}
                     <span>{item.name}</span>
-                  </div>
-                </Link>
-              );
-            })}
+                  </Link>
+                );
+              })}
+            </div>
           </div>
-        </div>
+        </>
       )}
     </nav>
   );

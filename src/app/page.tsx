@@ -257,6 +257,14 @@ const HomePage: React.FC = () => {
       link: '/travel',
       color: 'bg-green-500'
     },
+    {
+      icon: FileText,
+      title: 'Visa & Documentation',
+      description: 'Expert visa assistance and document preparation for seamless international study.',
+      features: ['Visa Applications', 'Document Review', 'Interview Preparation', 'Legal Compliance'],
+      link: '/contact',
+      color: 'bg-purple-500'
+    },
   ];
 
   const testimonials = [
@@ -489,50 +497,40 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* Meet Our Expert Section */}
-      <section ref={expertRef} className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="expert-header text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4" style={{ color: '#1e3a8a' }}>Meet Our Expert</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+      <section ref={expertRef} className="expert-section bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="expert-header text-center">
+            <h2 className="font-bold" style={{ color: '#1e3a8a' }}>Meet Our Expert</h2>
+            <p className="text-gray-600 max-w-3xl mx-auto">
               Get to know the visionary leader behind NextGen EduMirate Solutions
             </p>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="expert-grid grid grid-cols-1 lg:grid-cols-2">
             {/* Image Section */}
             <div className="expert-image flex justify-center lg:justify-end">
-              <div className="w-80 h-80 md:w-96 md:h-96 lg:w-[420px] lg:h-[420px]">
+              <div>
                 <img
                   src={expert.image}
                   alt={expert.name}
-                  className="w-full h-full object-cover rounded-full shadow-2xl"
+                  className="rounded-full shadow-2xl object-cover"
                 />
               </div>
             </div>
             
             {/* Content Section */}
             <div className="expert-content text-center lg:text-left">
-              <h3
-                className="expert-text text-2xl font-semibold mb-4"
-                style={{ color: '#1e3a8a' }}
-              >
+              <h3 className="font-semibold" style={{ color: '#1e3a8a' }}>
                 Meet Our Expert
               </h3>
-              <h4
-                className="expert-text text-4xl lg:text-5xl font-bold mb-4 leading-tight"
-                style={{ color: '#1e3a8a' }}
-              >
+              <h4 className="font-bold leading-tight" style={{ color: '#1e3a8a' }}>
                 {expert.name}
               </h4>
-              <p
-                className="expert-text text-xl font-light mb-6 text-gray-600"
-              >
+              <p className="font-light text-gray-600">
                 {expert.role}
               </p>
-              <div
-                className="expert-text text-lg leading-relaxed text-gray-700 max-w-2xl mx-auto lg:mx-0"
-              >
-                <p className="mb-4">
+              <div className="expert-description text-gray-700 max-w-2xl mx-auto lg:mx-0">
+                <p>
                   {expert.about.substring(0, 300)}...
                 </p>
                 <p>

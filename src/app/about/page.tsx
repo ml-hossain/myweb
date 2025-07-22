@@ -397,14 +397,14 @@ const AboutPage: React.FC = () => {
       </section>
 
       {/* Team Section */}
-      <section ref={teamRef} className="py-20 bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="team-header text-center mb-16">
+      <section ref={teamRef} className="team-section bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800">
+        <div className="max-w-7xl mx-auto">
+          <div className="team-header text-center">
             <h2 className="text-4xl font-bold text-white mb-4">Meet Our Expert Team</h2>
             <p className="text-xl text-primary-100">Experienced professionals dedicated to your success</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="team-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
             {team.map((member, index) => (
               <div
                 key={member.name}

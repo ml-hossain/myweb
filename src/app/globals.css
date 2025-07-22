@@ -4,10 +4,31 @@ html,
 body {
     padding: 0;
     margin: 0;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    width: 100%;
 }
 
 * {
     box-sizing: border-box;
+}
+
+/* Prevent mobile menu from causing layout shifts */
+body.menu-open {
+    position: fixed;
+    width: 100%;
+}
+
+/* Ensure mobile viewport is properly constrained */
+@media (max-width: 768px) {
+    html, body {
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
+    
+    /* Prevent zoom on input focus on iOS */
+    input, select, textarea {
+        font-size: 16px;
+    }
 }
 
 .navbar-spacing {
@@ -79,5 +100,539 @@ select {
 select option {
   color: #374151 !important;
   background-color: white !important;
+}
+
+/* Meet Our Expert Section Optimized Spacing */
+.expert-section {
+  padding: 4rem 0; /* 64px top/bottom */
+}
+
+@media (max-width: 640px) {
+  .expert-section {
+    padding: 3rem 0; /* 48px on mobile */
+  }
+}
+
+@media (min-width: 1024px) {
+  .expert-section {
+    padding: 5rem 0; /* 80px on desktop */
+  }
+}
+
+/* Expert Header Spacing */
+.expert-header {
+  margin-bottom: 3rem; /* 48px */
+}
+
+.expert-header h2 {
+  margin-bottom: 1rem; /* 16px */
+  font-size: 2.25rem; /* 36px */
+  line-height: 1.2;
+}
+
+.expert-header p {
+  font-size: 1.125rem; /* 18px */
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .expert-header {
+    margin-bottom: 2rem; /* 32px on mobile */
+  }
+  
+  .expert-header h2 {
+    font-size: 1.875rem; /* 30px on mobile */
+    margin-bottom: 0.75rem; /* 12px */
+  }
+  
+  .expert-header p {
+    font-size: 1rem; /* 16px on mobile */
+  }
+}
+
+/* Expert Content Grid */
+.expert-grid {
+  gap: 2rem; /* 32px gap */
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .expert-grid {
+    gap: 3rem; /* 48px gap on desktop */
+  }
+}
+
+/* Expert Image Container */
+.expert-image {
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .expert-image {
+    margin-bottom: 0;
+  }
+}
+
+.expert-image img {
+  width: 280px;
+  height: 280px;
+}
+
+@media (min-width: 768px) {
+  .expert-image img {
+    width: 320px;
+    height: 320px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .expert-image img {
+    width: 380px;
+    height: 380px;
+  }
+}
+
+/* Expert Content */
+.expert-content h3 {
+  margin-bottom: 0.75rem; /* 12px */
+  font-size: 1.25rem; /* 20px */
+}
+
+.expert-content h4 {
+  margin-bottom: 1rem; /* 16px */
+  font-size: 2.25rem; /* 36px */
+  line-height: 1.1;
+}
+
+.expert-content > p {
+  margin-bottom: 1.5rem; /* 24px */
+  font-size: 1.125rem; /* 18px */
+}
+
+.expert-content .expert-description {
+  font-size: 1rem; /* 16px */
+  line-height: 1.7;
+}
+
+.expert-content .expert-description p {
+  margin-bottom: 1rem; /* 16px */
+}
+
+.expert-content .expert-description p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 640px) {
+  .expert-content h3 {
+    font-size: 1.125rem; /* 18px */
+    margin-bottom: 0.5rem; /* 8px */
+  }
+  
+  .expert-content h4 {
+    font-size: 1.875rem; /* 30px */
+    margin-bottom: 0.75rem; /* 12px */
+  }
+  
+  .expert-content > p {
+    font-size: 1rem; /* 16px */
+    margin-bottom: 1rem; /* 16px */
+  }
+  
+  .expert-content .expert-description {
+    font-size: 0.875rem; /* 14px */
+  }
+}
+
+@media (min-width: 1024px) {
+  .expert-content h4 {
+    font-size: 3rem; /* 48px */
+  }
+  
+  .expert-content > p {
+    font-size: 1.25rem; /* 20px */
+  }
+  
+  .expert-content .expert-description {
+    font-size: 1.125rem; /* 18px */
+  }
+}
+
+/* Team Carousel Spacing */
+.team-carousel-container {
+  padding: 3rem 0;
+}
+
+@media (max-width: 640px) {
+  .team-carousel-container {
+    padding: 2rem 0;
+  }
+}
+
+.team-carousel-content {
+  padding: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .team-carousel-content {
+    padding: 0;
+  }
+}
+
+/* Team Section Spacing */
+.team-section {
+  padding: 4rem 0;
+}
+
+@media (max-width: 640px) {
+  .team-section {
+    padding: 3rem 0;
+  }
+}
+
+.team-header {
+  margin-bottom: 3rem;
+}
+
+@media (max-width: 640px) {
+  .team-header {
+    margin-bottom: 2rem;
+  }
+}
+
+.team-grid {
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .team-grid {
+    gap: 1.5rem;
+  }
+}
+
+/* Fix any excessive margins/padding */
+.expert-text {
+  margin-top: 0;
+}
+
+/* Ensure consistent container spacing */
+.max-w-7xl {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .max-w-7xl {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .max-w-7xl {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Mobile Navbar Fixes */
+.mobile-navbar-fixed {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 50;
+  background: white;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Ensure navbar is fixed on all screen sizes */
+@media (max-width: 768px) {
+  .mobile-navbar-fixed {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    z-index: 9999;
+    background: white;
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Fixed navbar spacing compensation */
+body {
+  padding-top: 0;
+}
+
+/* Main content spacing to account for fixed navbar */
+main {
+  padding-top: 64px; /* Default navbar height */
+}
+
+@media (max-width: 640px) {
+  main {
+    padding-top: 56px; /* Mobile navbar height */
+  }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+  main {
+    padding-top: 60px; /* Tablet navbar height */
+  }
+}
+
+@media (min-width: 769px) {
+  main {
+    padding-top: 64px; /* Desktop navbar height */
+  }
+}
+
+/* Mobile menu container */
+.mobile-menu-container {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: white;
+  border-top: 1px solid #e5e7eb;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  max-height: calc(100vh - 64px);
+  overflow-y: auto;
+  z-index: 51;
+  pointer-events: auto;
+}
+
+/* Mobile menu items */
+.mobile-nav-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 12px 16px;
+  margin: 4px 8px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #374151;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  outline: none;
+  pointer-events: auto;
+  position: relative;
+  z-index: 51;
+}
+
+.mobile-nav-item:hover {
+  background-color: #f3f4f6;
+  color: #1e3a8a;
+  transform: translateX(4px);
+}
+
+.mobile-nav-item:active {
+  background-color: #e5e7eb;
+}
+
+.mobile-nav-item svg {
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+/* Mobile menu button */
+.mobile-menu-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 6px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #374151;
+}
+
+.mobile-menu-button:hover {
+  background-color: #f3f4f6;
+  color: #1e3a8a;
+}
+
+.mobile-menu-button:focus {
+  outline: 2px solid #1e3a8a;
+  outline-offset: 2px;
+}
+
+/* Mobile menu animation */
+.mobile-menu-enter {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.mobile-menu-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.mobile-menu-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mobile-menu-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Prevent body scroll when mobile menu is open */
+body.mobile-menu-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+
+/* Mobile navbar container spacing */
+.mobile-navbar-content {
+  padding: 0 16px;
+}
+
+@media (min-width: 640px) {
+  .mobile-navbar-content {
+    padding: 0 24px;
+  }
+}
+
+/* Logo responsive sizing */
+.navbar-logo {
+  height: 48px;
+  width: auto;
+}
+
+@media (max-width: 640px) {
+  .navbar-logo {
+    height: 40px;
+  }
+}
+
+/* Fix navbar height consistency */
+.navbar-height {
+  height: 64px;
+}
+
+@media (max-width: 640px) {
+  .navbar-height {
+    height: 56px;
+  }
+}
+
+/* Mobile menu spacing */
+.mobile-menu-spacing {
+  padding: 8px 0 16px 0;
+}
+
+/* Ensure proper touch targets on mobile */
+@media (max-width: 768px) {
+  .mobile-nav-item {
+    min-height: 44px;
+    padding: 12px 16px;
+  }
+  
+  .mobile-menu-button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Fix any z-index issues */
+.mobile-navbar-wrapper {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 9999;
+}
+
+/* Ensure mobile navbar stays fixed on scroll */
+@media (max-width: 768px) {
+  .mobile-navbar-wrapper {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    z-index: 9999;
+    background: white;
+  }
+}
+
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: 40;
+  display: none;
+  pointer-events: auto;
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-overlay.active {
+    display: block;
+  }
+}
+
+/* Desktop Navigation Links */
+.nav-item {
+  cursor: pointer !important;
+  text-decoration: none !important;
+  pointer-events: auto !important;
+  position: relative;
+  z-index: 10;
+  display: flex !important;
+  align-items: center;
+}
+
+.nav-item:hover {
+  color: #1e3a8a !important;
+}
+
+.nav-item:focus {
+  outline: 2px solid #1e3a8a;
+  outline-offset: 2px;
+}
+
+/* Ensure all links are clickable */
+a {
+  cursor: pointer !important;
+  text-decoration: none !important;
+  pointer-events: auto !important;
+}
+
+a:hover {
+  text-decoration: none !important;
+}
+
+/* Fix for Next.js Link components */
+.navbar a, nav a {
+  pointer-events: auto !important;
+  z-index: 10;
+  position: relative;
+  cursor: pointer !important;
+}
+
+/* Mobile nav links specifically */
+.mobile-nav-item {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  text-decoration: none !important;
+  display: flex !important;
 }
 

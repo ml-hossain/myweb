@@ -13,6 +13,7 @@ export const metadata: Metadata = {
   title: "NextGen EduMirate Solutions - Education & Travel Services",
   description: "Your trusted partner for education abroad and travel services. We help you achieve your dreams of studying and traveling worldwide.",
   keywords: "education, travel, visa services, study abroad, scholarships, university admissions",
+  viewport: "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no",
 };
 
 export default function RootLayout({
@@ -24,7 +25,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} font-sans antialiased`} suppressHydrationWarning={true}>
         <Navbar />
-        <main className="min-h-screen pt-16">
+        <main className="min-h-screen">
           {children}
         </main>
         <Footer />
